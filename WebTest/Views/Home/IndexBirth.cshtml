@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WebTest.ViewModels.FriendViewModel>
+
+@{
+    ViewBag.Title = "Birthdays";
+}
+
+<h2>Birthdays</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsBestFriend)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDate)
+        </td>
+        <td>
+            @Html.CheckBoxFor(modelItem => item.IsBestFriend, new Dictionary<string, object>
+               {
+                   {"friendId", item.Id },
+                   {"onclick", "setBestFriend(this)" }
+                })
+        </td>
+    </tr>
+}
+
+</table>
+
+@section Scripts
+{
+    <script>
+        function setBestFriend(checkbox) {
+            if ($(checkbox).prop("checked") == true)
+                $.ajax(
+                {
+                    url: "@Url.Action("SetBestFriend", "Home")",
+                    type: "get",
+                    data: {
+                        friendId: checkbox.getAttribute('friendId')
+                    }
+                });
+            else
+                $.ajax(
+                {
+                    url: "@Url.Action("RemoveBestFriend", "Home")",
+                    type: "get",
+                    data: {
+                        friendId: checkbox.getAttribute('friendId')
+                    }
+                });
+        }
+    </script>
+}
