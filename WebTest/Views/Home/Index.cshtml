@@ -49,7 +49,7 @@
 {
     <script>
         function setBestFriend(checkbox) {
-            if ($(checkbox).prop("checked") == true)
+            if ($(checkbox).prop("checked") === true)
                 $.ajax(
                 {
                     url: "@Url.Action("SetBestFriend", "Home")",

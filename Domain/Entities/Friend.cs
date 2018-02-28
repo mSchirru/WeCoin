@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Data_Access.Domain
+namespace Domain.Entities
 {
     public class Friend
     {

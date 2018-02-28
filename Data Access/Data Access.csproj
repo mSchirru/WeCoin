@@ -66,14 +66,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Friend.cs" />
     <Compile Include="EF\LocalContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Implementations\BaseRepository.cs" />
-    <Compile Include="Repositories\Implementations\FriendRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IBaseRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IFriendRepository.cs" />
+    <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\FriendRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -101,6 +98,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>TP1Base.mdf</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{7C7B1473-A520-4F1C-937F-E7BDC4D1C30F}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

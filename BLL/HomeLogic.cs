@@ -1,47 +1,41 @@
-﻿using AutoMapper;
-using Data_Access;
-using Data_Access.Domain;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using WebTest.AutoMapper;
-using WebTest.ViewModels;
+using System.Web;
+using AutoMapper;
+using Data_Access.EF;
+using Domain.Entities;
 
 namespace BLL
 {
     public class HomeLogic
     {
         private LocalContext lc = new LocalContext();
-
-        static HomeLogic()
+        
+        public List<FriendViewModelClone> GetFriends()
         {
-            AutoMapperConfig.RegisterMappings();
-        }
+            List<FriendViewModelClone> friendViewModel = (List<FriendViewModelClone>) Mapper.Map<IEnumerable<Friend>, IEnumerable<FriendViewModelClone>>(lc.Friends.ToList());
+            List<int> bestFriendIds = (List<int>) HttpContext.Current.Session["BestFriendIds"];
 
-        public List<FriendViewModel> GetFriends(object session)
-        {
-            List<FriendViewModel> friendViewModel = (List<FriendViewModel>) Mapper.Map<IEnumerable<Friend>, IEnumerable<FriendViewModel>>(lc.Friends.ToList());
-            List<int> BestFriendIds = (List<int>) session;
-
-            foreach (var friend in BestFriendIds)
+            foreach (var friend in bestFriendIds)
                 friendViewModel.Find(f => f.Id == friend).IsBestFriend = true;
 
             return friendViewModel;
         }
 
-        public void SetBestFriend(object session, int friendId)
+        public void SetBestFriend(int friendId)
         {
-            List<int> BestFriendIds = (List<int>) session;
-            BestFriendIds.Add(friendId);
+            List<int> bestFriendIds = (List<int>) HttpContext.Current.Session["BestFriendIds"];
+            bestFriendIds.Add(friendId);
 
-            session = BestFriendIds;
+            HttpContext.Current.Session["BestFriendIds"] = bestFriendIds;
         }
 
-        public void RemoveBestFriend(object session, int friendId)
+        public void RemoveBestFriend(int friendId)
         {
-            List<int> BestFriendIds = (List<int>) session;
-            BestFriendIds.Remove(friendId);
+            List<int> bestFriendIds = (List<int>) HttpContext.Current.Session["BestFriendIds"];
+            bestFriendIds.Remove(friendId);
 
-            session = BestFriendIds;
+            HttpContext.Current.Session["BestFriendIds"] = bestFriendIds;
         }
     }
 }

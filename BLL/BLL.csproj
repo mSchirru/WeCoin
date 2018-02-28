@@ -55,12 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapper\AutoMapperConfig.cs" />
-    <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
-    <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="HomeLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\FriendViewModel.cs" />
+    <Compile Include="FriendViewModelClone.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -70,6 +67,10 @@
     <ProjectReference Include="..\Data Access\Data Access.csproj">
       <Project>{08fd1310-1bd6-43da-8a0e-2aa9142845a2}</Project>
       <Name>Data Access</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{7c7b1473-a520-4f1c-937f-e7bdc4d1c30f}</Project>
+      <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

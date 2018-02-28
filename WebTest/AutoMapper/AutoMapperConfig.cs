@@ -10,6 +10,7 @@ namespace WebTest.AutoMapper
             {
                 x.AddProfile<DomainToViewModelMappingProfile>();
                 x.AddProfile<ViewModelToDomainMappingProfile>();
+                x.AddProfile<CloneViewModelProfile>();
             });
         }
     }

@@ -1,13 +1,15 @@
-﻿using Data_Access.Repositories.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Data_Access.EF;
+using Domain.Interfaces;
 
 namespace Data_Access.Repositories
 {
-    class BaseRepository<TEntity> : IDisposable, IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IDisposable, IBaseRepository<TEntity> where TEntity : class
     {
+
         protected LocalContext Lc = new LocalContext();
 
         public void Add(TEntity obj)
@@ -40,7 +42,7 @@ namespace Data_Access.Repositories
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Lc.Dispose();
         }
     }
 }

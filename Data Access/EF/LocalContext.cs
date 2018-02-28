@@ -1,7 +1,7 @@
-﻿using Data_Access.Domain;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using Domain.Entities;
 
-namespace Data_Access
+namespace Data_Access.EF
 {
     public class LocalContext : DbContext
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Data_Access.Domain;
-using WebTest.ViewModels;
+using BLL;
+using Domain.Entities;
 
 namespace WebTest.AutoMapper
 {
@@ -8,7 +8,7 @@ namespace WebTest.AutoMapper
     {
         public ViewModelToDomainMappingProfile()
         {
-            CreateMap<FriendViewModel, Friend>();
+            CreateMap<FriendViewModelClone, Friend>();
         }
 
         public override string ProfileName

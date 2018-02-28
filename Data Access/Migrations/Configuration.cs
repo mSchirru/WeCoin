@@ -1,18 +1,17 @@
+using Data_Access.EF;
+
 namespace Data_Access.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Data_Access.LocalContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<LocalContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(Data_Access.LocalContext context)
+        protected override void Seed(LocalContext context)
         {
             //  This method will be called after migrating to the latest version.
 

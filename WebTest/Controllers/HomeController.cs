@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using BLL;
+using AutoMapper;
+using WebTest.ViewModels;
 
 namespace WebTest.Controllers
 {
@@ -18,23 +20,25 @@ namespace WebTest.Controllers
 
         public ActionResult Index()
         {
-            return View(Hl.GetFriends(Session["BestFriendIds"]));
+            List<FriendViewModelClone> friendViewModelClones = Hl.GetFriends();
+            return View(Mapper.Map<List<FriendViewModel>>(friendViewModelClones));
         }
 
         public ActionResult IndexBirth()
         {
-            return View(Hl.GetFriends(Session["BestFriendIds"]));
+            List<FriendViewModelClone> friendViewModelClones = Hl.GetFriends();
+            return View(Mapper.Map<List<FriendViewModel>>(friendViewModelClones));
         }
 
         public ActionResult SetBestFriend(int friendId)
         {
-            Hl.SetBestFriend(Session["BestFriendIds"], friendId);
+            Hl.SetBestFriend(friendId);
             return Json(new {status="OK"}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult RemoveBestFriend(int friendId)
         {
-            Hl.RemoveBestFriend(Session["BestFriendIds"], friendId);
+            Hl.RemoveBestFriend(friendId);
             return Json(new { status = "OK" }, JsonRequestBehavior.AllowGet);
         }
     }
