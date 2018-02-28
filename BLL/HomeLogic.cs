@@ -3,6 +3,7 @@ using Data_Access;
 using Data_Access.Domain;
 using System.Collections.Generic;
 using System.Linq;
+using WebTest.AutoMapper;
 using WebTest.ViewModels;
 
 namespace BLL
@@ -11,9 +12,14 @@ namespace BLL
     {
         private LocalContext lc = new LocalContext();
 
+        static HomeLogic()
+        {
+            AutoMapperConfig.RegisterMappings();
+        }
+
         public List<FriendViewModel> GetFriends(object session)
         {
-            List<FriendViewModel> friendViewModel = (List<FriendViewModel>)Mapper.Map<IEnumerable<Friend>, IEnumerable<FriendViewModel>>(lc.Friends.ToList());
+            List<FriendViewModel> friendViewModel = (List<FriendViewModel>) Mapper.Map<IEnumerable<Friend>, IEnumerable<FriendViewModel>>(lc.Friends.ToList());
             List<int> BestFriendIds = (List<int>) session;
 
             foreach (var friend in BestFriendIds)
