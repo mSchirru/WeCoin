@@ -241,5 +241,3 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-# Hiding connection string
-Web.config
