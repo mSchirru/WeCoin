@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 
 namespace API.Controllers
@@ -10,18 +6,23 @@ namespace API.Controllers
     [Authorize]
     public class ValuesController : ApiController
     {
+        private List<string> test_list = new List<string>
+        {
+            "Mikael", "Alexandre", "Lapa", "Diego", "Joao"
+        };
+
         // GET api/values
         [HttpPost]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return test_list;
         }
 
-        // GET api/values/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //// GET api/values/5
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/values
         //public void Post([FromBody]string value)
