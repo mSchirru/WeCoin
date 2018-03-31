@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
@@ -14,9 +13,6 @@ namespace Domain.Entities
         [Key]
         public int Gid { get; set; }
         public Name UserName { get; set; }
-        [Index(IsUnique = true)]
-        [MaxLength(100)]
-        public string UserEmail { get; set; }
         
         public virtual ICollection<Friendship> Friendships { get; set; }
         public virtual ICollection<Friendship> Friendships1 { get; set; }

@@ -1,67 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using Presentation.ViewModels;
 
 namespace Presentation.Controllers
 {
     public class HomeController : Controller
     {
-
-        const string userName = "noisefoda@foda.com.br";
-        const string password = "$oTemFoda";
-        const string apiBaseUri = "http://localhost:2178/";
-        const string apiGetValues = "/api/values";
-
-        static void Main(string[] args)
-        {
-            //Get the token
-            var token = GetAPIToken(userName, password, apiBaseUri).Result;
-            Console.WriteLine("Token: {0}", token);
-
-            //Make the call
-
-            var response = GetRequest(token, apiBaseUri, apiGetValues).Result;
-            Console.WriteLine("response: {0}", response);
-
-            //wait for key press to exit
-            Console.ReadKey();
-        }
-
-        private static async Task<string> GetAPIToken(string userName, string password, string apiBaseUri)
-        {
-            using (var client = new HttpClient())
-            {
-                //setup client
-                client.BaseAddress = new Uri(apiBaseUri);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-
-                //setup login data
-                var formContent = new FormUrlEncodedContent(new[]
-                {
-                    new KeyValuePair<string, string>("grant_type", "password"),
-                    new KeyValuePair<string, string>("username", userName),
-                    new KeyValuePair<string, string>("password", password),
-                });
-
-                //send request
-                HttpResponseMessage responseMessage = await client.PostAsync("/Token", formContent);
-
-                //get access token from response body
-                var responseJson = await responseMessage.Content.ReadAsStringAsync();
-                var jObject = JObject.Parse(responseJson);
-                return jObject.GetValue("access_token").ToString();
-            }
-        }
-
-        static async Task<string> GetRequest(string token, string apiBaseUri, string requestPath)
+        private async Task<string> GetRequest(string token, string apiBaseUri, string requestPath)
         {
             using (var client = new HttpClient())
             {
@@ -78,23 +28,95 @@ namespace Presentation.Controllers
             }
         }
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
+        public ActionResult Index()
+        {
+            //HttpClient client = new HttpClient();
 
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your application description page.";
+            //const string userName = "noisefoda@foda.com.br";
+            //const string password = "$oTemFoda";
+            //const string apiBaseUri = "http://localhost:2539/";
+            //const string apiGetValues = "api/values";
 
-        //    return View();
-        //}
+            ////setup client
+            //client.BaseAddress = new Uri(apiBaseUri);
+            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //public ActionResult Contact()
-        //{
-        //    ViewBag.Message = "Your contact page.";
+            //JObject requestBody = new JObject();
+            //requestBody.Add("Email", "alex@hotmail.com");
+            //requestBody.Add("FirstName", "alex moro");
+            //requestBody.Add("LastName", "Jesus");
+            //requestBody.Add("Password", "1Pud!m");
+            //requestBody.Add("ConfirmPassword", "1Pud!m");
 
-        //    return View();
-        //}
+            //send request
+            //HttpResponseMessage responseMessage = client.PostAsJsonAsync("api/Account/Register", requestBody).Result;
+
+            //get access token from response body
+            //var jsonObject = JObject.Parse(responseMessage.Content.ReadAsStringAsync().Result);
+            //jsonObject.GetValue("access_token").ToString();
+
+
+
+
+            //PEGANDO TOKEN
+            HttpClient client = new HttpClient();
+
+            const string apiBaseUri = "http://localhost:2539/";
+            
+            client.BaseAddress = new Uri(apiBaseUri);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+
+            var requestBody = new FormUrlEncodedContent(new[]
+            {
+                    new KeyValuePair<string, string>("grant_type", "password"),
+                    new KeyValuePair<string, string>("username", "diegovictorbr@hotmail.com"),
+                    new KeyValuePair<string, string>("password", "1Pud!m"),
+            });
+
+            HttpResponseMessage responseMessage = client.PostAsync("/Token", requestBody).Result;
+            
+            var jsonObject = JObject.Parse(responseMessage.Content.ReadAsStringAsync().Result);
+            Session["userToken"] = jsonObject.GetValue("access_token").ToString();
+            //PEGANDO TOKEN
+
+
+
+            //USANDO TOKEN PARA CONSUMIR UM ENDPOINT
+
+            //setup client
+            client.DefaultRequestHeaders.Clear();
+            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["userToken"].ToString());
+
+
+            JArray users = JArray.Parse(client.GetStringAsync("api/Values").Result);
+
+            //List<UserViewModel> users = ToObject<List<UserViewModel>>();
+            //USANDO TOKEN PARA CONSUMIR UM ENDPOINT
+
+            // TODO: receber lista de usuários do endpoint e converter usando AutoMapper
+
+            //var token = GetAPIToken(userName, password, apiBaseUri).Result;
+            //Console.WriteLine("Token: {0}", token);
+
+            //var response = GetRequest(token, apiBaseUri, apiGetValues).Result;
+            //Console.WriteLine("response: {0}", response);
+
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }

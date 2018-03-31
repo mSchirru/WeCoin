@@ -12,9 +12,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using API.Models;
 using API.Providers;
 using API.Results;
+using API.ViewModels;
 using Domain.Entities;
 
 namespace API.Controllers
@@ -328,7 +328,6 @@ namespace API.Controllers
 
             var userInfo = new User()
             {
-                UserEmail = model.Email,
                 UserName = new Name()
                 {
                     FirstName = model.FirstName,
