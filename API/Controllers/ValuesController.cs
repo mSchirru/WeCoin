@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Domain.Entities;
+using Services;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace API.Controllers
@@ -6,17 +8,15 @@ namespace API.Controllers
     [Authorize]
     public class ValuesController : ApiController
     {
-        private List<string> test_list = new List<string>
-        {
-            "Mikael", "Alexandre", "Lapa", "Diego", "Joao"
-        };
-
+        private readonly ApplicationUserService appUserService = new ApplicationUserService();
+        
         // GET api/values
-        [HttpPost]
-        public IEnumerable<string> Get()
+        public IEnumerable<ApplicationUser> GetUsers()
         {
-            return test_list;
+            return appUserService.GetAll();
         }
+
+        //public ApplicationUser GetUser()
 
         //// GET api/values/5
         //public string Get(int id)

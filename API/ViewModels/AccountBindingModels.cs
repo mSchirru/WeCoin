@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.Models
+namespace API.ViewModels
 {
     // Models used as parameters to AccountController actions.
 
