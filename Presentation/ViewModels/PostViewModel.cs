@@ -11,7 +11,7 @@ namespace Presentation.ViewModels
         public string ImageUri { get; set; }
         public DateTime PostTime { get; set; }
 
-        public UserViewModel Author { get; set; }
+        public ApplicationUserViewModel Author { get; set; }
         public ICollection<ReactionViewModel> Reactions { get; set; }
     }
 }

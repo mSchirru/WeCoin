@@ -8,7 +8,7 @@ namespace Presentation.AutoMapper
     {
         public EntityViewModelMappingProfile()
         {
-            CreateMap<User, UserViewModel>();
+            CreateMap<ApplicationUser, ApplicationUserViewModel>();
             //CreateMap<ProductViewModel, Product>();
         }
 

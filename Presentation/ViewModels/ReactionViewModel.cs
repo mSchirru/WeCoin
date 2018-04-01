@@ -8,7 +8,7 @@
         public string Text { get; set; }
         public string IconUri { get; set; }
 
-        public UserViewModel ReactionOwner { get; set; }
+        public ApplicationUserViewModel ReactionOwner { get; set; }
         public PostViewModel ReactionPost { get; set; }
     }
 }
