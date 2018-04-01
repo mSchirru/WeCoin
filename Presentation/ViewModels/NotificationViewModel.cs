@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace Domain.Entities
+namespace Presentation.ViewModels
 {
-    public class Notification
+    public class NotificationViewModel
     {
         public int NotificationId { get; set; }
-        public string ApplicationUserId { get; set; }
+        public int UserId { get; set; }
         public string Message { get; set; }
         public DateTime NotificationTime { get; set; }
         public bool WasRead { get; set; }
 
-        public virtual ApplicationUser NotifiedApplicationUser { get; set; }
+        public ApplicationUserViewModel NotifiedUser { get; set; }
     }
 }

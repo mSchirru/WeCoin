@@ -12,9 +12,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using API.Models;
 using API.Providers;
 using API.Results;
+using API.ViewModels;
 using Domain.Entities;
 
 namespace API.Controllers
@@ -326,18 +326,8 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userInfo = new User()
-            {
-                UserEmail = model.Email,
-                UserName = new Name()
-                {
-                    FirstName = model.FirstName,
-                    SecName = model.LastName
-                }
-            };
-            
             //O EntityFramework entende que deve preencher a outra tabela de usuários a partir da associação
-            var user = new ApplicationUser() {UserName = model.Email, Email = model.Email, UserInfo = userInfo};
+            var user = new ApplicationUser() {UserName = $"{model.FirstName} {model.LastName}", Email = model.Email};
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)

@@ -6,8 +6,6 @@ namespace Data_Access.EF
 {
     public class RemoteContext : IdentityDbContext<ApplicationUser>
     {
-        public virtual IDbSet<User> UsersInfos { get; set; }
-
         public static RemoteContext Create()
         {
             return new RemoteContext();
@@ -15,25 +13,22 @@ namespace Data_Access.EF
 
         protected override void OnModelCreating(DbModelBuilder dbModelBuilder)
         {
-            dbModelBuilder.Entity<User>()
+            dbModelBuilder.Entity<ApplicationUser>()
                 .HasMany(e => e.Friendships)
-                .WithRequired(e => e.ToUser)
-                .HasForeignKey(e => e.ToUserId)
+                .WithRequired(e => e.ToApplicationUser)
+                .HasForeignKey(e => e.ToApplicationUserId)
                 .WillCascadeOnDelete(false);
 
-            dbModelBuilder.Entity<User>()
-                .HasMany(e => e.Friendships1)
-                .WithRequired(e => e.FromUser)
-                .HasForeignKey(e => e.FromUserId)
-                .WillCascadeOnDelete(false);
-            
             dbModelBuilder.Entity<ApplicationUser>()
-                .HasRequired(au => au.UserInfo);
+                .HasMany(e => e.Friendships1)
+                .WithRequired(e => e.FromApplicationUser)
+                .HasForeignKey(e => e.FromApplicationUserId)
+                .WillCascadeOnDelete(false);
 
             dbModelBuilder.Entity<Wallet>()
                 .HasRequired(w => w.WalletOwner)
                 .WithMany(u => u.Wallets)
-                .HasForeignKey(w => w.UserId)
+                .HasForeignKey(w => w.ApplicationUserId)
                 .WillCascadeOnDelete(false);
 
             dbModelBuilder.Entity<Wallet>()
@@ -45,21 +40,21 @@ namespace Data_Access.EF
                 .HasMaxLength(300);
 
             dbModelBuilder.Entity<Notification>()
-                .HasRequired(n => n.NotifiedUser)
+                .HasRequired(n => n.NotifiedApplicationUser)
                 .WithMany(u => u.Notifications)
-                .HasForeignKey(n => n.UserId)
+                .HasForeignKey(n => n.ApplicationUserId)
                 .WillCascadeOnDelete(false);
 
             dbModelBuilder.Entity<Post>()
                 .HasRequired(p => p.Author)
                 .WithMany(u => u.Posts)
-                .HasForeignKey(p => p.UserId)
+                .HasForeignKey(p => p.ApplicationUserId)
                 .WillCascadeOnDelete(false);
 
             dbModelBuilder.Entity<Reaction>()
                 .HasRequired(r => r.ReactionOwner)
                 .WithMany(u => u.Reactions)
-                .HasForeignKey(r => r.UserId)
+                .HasForeignKey(r => r.ApplicationUserId)
                 .WillCascadeOnDelete(false);
 
             base.OnModelCreating(dbModelBuilder);
