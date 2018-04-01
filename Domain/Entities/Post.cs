@@ -7,7 +7,7 @@ namespace Domain.Entities
     {
         public Post() {}
 
-        public Post(string content, string imageUri, User author)
+        public Post(string content, string imageUri, ApplicationUser author)
         {
             PostTime = DateTime.Now;
             Content = content;
@@ -16,12 +16,12 @@ namespace Domain.Entities
         }
 
         public int PostId { get; set; }
-        public int UserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public string Content { get; set; }
         public string ImageUri { get; set; }
         public DateTime PostTime { get; set; }
 
-        public virtual User Author { get; set; }
+        public virtual ApplicationUser Author { get; set; }
         public virtual ICollection<Reaction> Reactions { get; set; }
     }
 }

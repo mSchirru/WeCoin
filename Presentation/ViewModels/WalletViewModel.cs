@@ -11,6 +11,6 @@
         public double Amount { get; set; }
         public double Quote { get; set; }
 
-        public UserViewModel WalletOwner { get; set; }
+        public ApplicationUserViewModel WalletOwner { get; set; }
     }
 }

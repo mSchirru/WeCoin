@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using Presentation.ViewModels;
+using Domain.Entities;
 
 namespace Presentation.Controllers
 {
@@ -90,6 +90,8 @@ namespace Presentation.Controllers
 
 
             JArray users = JArray.Parse(client.GetStringAsync("api/Values").Result);
+
+            IEnumerable<ApplicationUser> appUsers = users.ToObject<IEnumerable<ApplicationUser>>();
 
             //List<UserViewModel> users = ToObject<List<UserViewModel>>();
             //USANDO TOKEN PARA CONSUMIR UM ENDPOINT

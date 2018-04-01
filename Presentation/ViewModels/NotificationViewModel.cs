@@ -10,6 +10,6 @@ namespace Presentation.ViewModels
         public DateTime NotificationTime { get; set; }
         public bool WasRead { get; set; }
 
-        public UserViewModel NotifiedUser { get; set; }
+        public ApplicationUserViewModel NotifiedUser { get; set; }
     }
 }

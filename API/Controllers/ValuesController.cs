@@ -11,10 +11,12 @@ namespace API.Controllers
         private readonly ApplicationUserService appUserService = new ApplicationUserService();
         
         // GET api/values
-        public IEnumerable<ApplicationUser> Get()
+        public IEnumerable<ApplicationUser> GetUsers()
         {
             return appUserService.GetAll();
         }
+
+        //public ApplicationUser GetUser()
 
         //// GET api/values/5
         //public string Get(int id)
