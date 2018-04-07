@@ -12,5 +12,10 @@ namespace Repositories.Repositories
         {
             return Rc.Users.Where(au => au.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
+
+        public void CreateUserPost(string userId, Post post)
+        {
+            Rc.Users.SingleOrDefault(u => u.Id == userId).Posts.Add(post);
+        }
     }
 }

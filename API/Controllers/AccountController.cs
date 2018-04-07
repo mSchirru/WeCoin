@@ -327,7 +327,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
 
             //O EntityFramework entende que deve preencher a outra tabela de usuários a partir da associação
-            var user = new ApplicationUser() {UserName = $"{model.FirstName} {model.LastName}", Email = model.Email};
+            var user = new ApplicationUser() {UserName = model.Email, Email = model.Email, Name = model.Name };
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)

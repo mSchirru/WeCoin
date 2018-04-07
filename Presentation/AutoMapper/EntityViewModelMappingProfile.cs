@@ -9,7 +9,7 @@ namespace Presentation.AutoMapper
         public EntityViewModelMappingProfile()
         {
             CreateMap<ApplicationUser, ApplicationUserViewModel>();
-            //CreateMap<ProductViewModel, Product>();
+            CreateMap<Post, PostViewModel>();
         }
 
         public override string ProfileName
