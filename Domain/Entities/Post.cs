@@ -21,6 +21,7 @@ namespace Domain.Entities
         public string ImageUri { get; set; }
         public DateTime PostTime { get; set; }
 
+
         public virtual ApplicationUser Author { get; set; }
         public virtual ICollection<Reaction> Reactions { get; set; }
     }
