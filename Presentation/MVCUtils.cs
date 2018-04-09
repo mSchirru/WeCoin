@@ -10,7 +10,7 @@ namespace Presentation
     {
         private const string BASE_API_ADDRESS = "http://localhost:2539";
 
-        public static string SetSessionToken(string username, string psw)
+        public static string GetUserToken(string username, string psw)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BASE_API_ADDRESS);

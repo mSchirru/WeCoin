@@ -1,0 +1,86 @@
+﻿@*@model Presentation.ViewModels.ApplicationUserViewModel
+<body>
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "WeCoin - Home";
+        Styles.Render("~/Content/PostList.css");
+    }
+    <div class="container text-center" style="margin-top: 3%">
+        <div class="row">
+            <div class="col-sm-3 well">
+                <div class="well">
+                    <img src="/padrao.png" class="img-circle" height="65" width="65" alt="Avatar">
+                    <p>@Html.ActionLink("My Profile", "Profile", "Home")</p>
+                </div>
+                <div class="well">
+                    <p><a href="#">Interests</a></p>
+                    <p>
+                        <span class="label label-default">News</span>
+                        <span class="label label-primary">W3Schools</span>
+                        <span class="label label-success">Labels</span>
+                        <span class="label label-info">Football</span>
+                        <span class="label label-warning">Gaming</span>
+                        <span class="label label-danger">Friends</span>
+                    </p>
+                </div>
+                <div class="alert alert-success fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <p><strong>Ey!</strong></p>
+                    People are looking at your profile. Find out who.
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="well col-sm-6">
+                    <form class="form-horizontal" role="form">
+                        <h4>What's New</h4>
+                        <div class="form-group" style="padding: 14px;">
+                            <textarea class="form-control" placeholder="Update your status"></textarea>
+                        </div>
+                        <button class="btn btn-primary pull-right" type="button">Post</button><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+                    </form>
+                </div>
+                <div class="col-sm-4 well" style="margin-left: 5%">
+                    <div class="thumbnail">
+                        <p>MINERAR AQUI</p>
+                    </div>
+                </div>
+                <table class="table col-sm-9">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ImgURL)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Posts)
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@Url.Content(item.ImgURL)" style="width: 50px; height: 50px;" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @foreach (var item2 in item.Posts)
+                                {
+                                    @Html.DisplayFor(modelItem => item2.Content)
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</body>*@
