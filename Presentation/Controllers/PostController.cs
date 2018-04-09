@@ -9,29 +9,6 @@ namespace Presentation.Controllers
 {
     public class PostController : Controller
     {
-        // GET: Post/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Post/Create
-        [HttpPost]
-        public ActionResult Create(PostViewModel pvm)
-        {
-            pvm.PostTime = DateTime.Now;
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index", "Home");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        
         // POST: Post/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
@@ -40,7 +17,7 @@ namespace Presentation.Controllers
             {
                 // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Home");
             }
             catch
             {
@@ -56,7 +33,7 @@ namespace Presentation.Controllers
             {
                 // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Home");
             }
             catch
             {

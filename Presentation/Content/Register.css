@@ -1,0 +1,9 @@
+﻿body {
+    background: url(https://optclean.com.br/wp-content/uploads/2017/09/bitcoin-e1466596991401.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 30px;
+}
+.form-control { margin-bottom: 10px; }

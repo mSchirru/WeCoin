@@ -2,25 +2,29 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Mvc;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using Presentation.ViewModels;
 using Newtonsoft.Json;
 
 namespace Presentation.Controllers
 {
-    public class HomeController : Controller
+    public class UserController : Controller
     {
         private const string BASE_API_ADDRESS = "http://localhost:2539";
 
-        public ActionResult Index()
+        public ActionResult Home()
         {
             //if (Session["userToken"] == null)
             //    return RedirectToAction("Login");
 
             //return View();
 
-            Session["userToken"] = MVCUtils.SetSessionToken("jacinto@gmail.com", "1Pud!m");
+            //TODO: a partir da lista de usuários, carregar posts relativos ao usuário logado
+
+            if (Session["userToken"] == null)
+                return RedirectToAction("Login", "Login");
+
+
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BASE_API_ADDRESS);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -28,6 +32,27 @@ namespace Presentation.Controllers
 
             IEnumerable<ApplicationUserViewModel> appUsers = JsonConvert.DeserializeObject<IEnumerable<ApplicationUserViewModel>>(client.GetStringAsync("api/ApplicationUser").Result);      
             return View();
+        }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreatePost(PostViewModel pvm)
+        {
+            pvm.PostTime = DateTime.Now;
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Home", "Home");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

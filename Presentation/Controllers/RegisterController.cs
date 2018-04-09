@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Presentation.ViewModels;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -9,11 +10,6 @@ namespace Presentation.Controllers
     public class RegisterController : Controller
     {
         private const string BASE_API_ADDRESS = "http://localhost:2539";
-
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public void RegisterUser(string email, string name, string psw, string confirmationPsw)
         {
@@ -32,6 +28,26 @@ namespace Presentation.Controllers
 
             client.PostAsJsonAsync(apiEndpoint, requestBody);
             // TODO: implementar indicação do resultado do POST de cadastro
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(ApplicationUserViewModel avm)
+        {
+
+
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+
+            //TODO: registrar usuário e receber sinal de sucesso ou erro no cadastro
+            return View();
         }
     }
 }

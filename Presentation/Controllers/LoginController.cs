@@ -6,17 +6,25 @@ namespace Presentation.Controllers
     {
         private const string BASE_API_ADDRESS = "http://localhost:2539";
 
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        private ActionResult Login(FormCollection formCollection)
+        public ActionResult Login(string email, string psw)
         {
-            Session["userToken"] = MVCUtils.SetSessionToken(formCollection["loginEmail"], formCollection["loginPsw"]);
+            //TODO: adicionar tratamento para o caso de não encontrar o usuário
+            //TODO: implementar verificação nas páginas sobre um token ativo ou inativo
+            string userToken = MVCUtils.GetUserToken(email, psw);
+            
+            if (userToken != null)
+            {
+                Session["userToken"] = userToken;
+                return RedirectToAction("Home", "User");
+            }
 
-            return RedirectToAction("Index", "HomeController");
+            return View();
         }
     }
 }

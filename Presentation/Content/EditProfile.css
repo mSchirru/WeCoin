@@ -1,0 +1,16 @@
+﻿body {
+    background: #e9ebee;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 30px;
+}
+
+.form-control {
+    margin-bottom: 2vh;
+}
+
+.container {
+    margin-left: 17%;
+}
