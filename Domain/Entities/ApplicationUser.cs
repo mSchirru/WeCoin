@@ -13,6 +13,8 @@ namespace Domain.Entities
         public string Name { get; set; }
         public override string PasswordHash { get; set; }
         public override string SecurityStamp { get; set; }
+        public string ImgUrl { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
@@ -31,7 +33,6 @@ namespace Domain.Entities
         public virtual bool ShouldSerializePasswordHash() => false;
         public virtual bool ShouldSerializeSecurityStamp() => false;
 
-        //Relação auxiliar para a ligação do Entity
         public virtual ICollection<Friendship> Friendships { get; set; }
         public virtual ICollection<Friendship> Friends { get; set; }
         public virtual ICollection<Wallet> Wallets { get; set; }

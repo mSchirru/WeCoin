@@ -20,16 +20,16 @@
             </div>
             <div class="navbar-collapse collapse">
                 @* TODO: acertar barra de busca quebrando linha *@
-                @*<form class="navbar-form" role="search">
-                        <div class="form-group input-group">
-                            <input type="text" class="form-control" placeholder="Search..">
+                <form class="navbar-form" role="search">
+                        <div class="input-group" id="searchComponent">
+                            <input type="text" class="form-control navbar-right" placeholder="Search..">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
                             </span>
                         </div>
-                    </form>*@
+                    </form>
                 <ul class="nav navbar-nav navbar-right" id="myAccountBtn">
                     <li>@Html.ActionLink("Minhas informações", "Edit", "User")</li>
                 </ul>

@@ -1,4 +1,5 @@
-﻿@*@model Presentation.ViewModels.ApplicationUserViewModel
+﻿@using System.Security.Policy
+@model Presentation.ViewModels.ApplicationUserViewModel
 <body>
     @{
         Layout = "~/Views/Shared/_Layout.cshtml";
@@ -47,10 +48,10 @@
                 <table class="table col-sm-9">
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.ImgURL)
+                            @Html.DisplayNameFor(model => model.ImgUrl)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Nome)
+                            @Html.DisplayNameFor(model => model.Name)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Email)
@@ -59,8 +60,12 @@
                             @Html.DisplayNameFor(model => model.Posts)
                         </th>
                     </tr>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Friends)
                     {
+                        foreach (var item2 in item.)
+                        {
+                            
+                        }
                         <tr>
                             <td>
                                 <img src="@Url.Content(item.ImgURL)" style="width: 50px; height: 50px;" />
@@ -83,4 +88,4 @@
             </div>
         </div>
     </div>
-</body>*@
+</body>
