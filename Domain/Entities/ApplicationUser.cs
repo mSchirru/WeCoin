@@ -31,8 +31,9 @@ namespace Domain.Entities
         public virtual bool ShouldSerializePasswordHash() => false;
         public virtual bool ShouldSerializeSecurityStamp() => false;
 
+        //Relação auxiliar para a ligação do Entity
         public virtual ICollection<Friendship> Friendships { get; set; }
-        public virtual ICollection<Friendship> Friendships1 { get; set; }
+        public virtual ICollection<Friendship> Friends { get; set; }
         public virtual ICollection<Wallet> Wallets { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
