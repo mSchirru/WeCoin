@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Domain.Entities;
+﻿using Domain.Entities;
 
 namespace Presentation.ViewModels
 {
