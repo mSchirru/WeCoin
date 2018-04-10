@@ -8,24 +8,24 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
-                <legend><a href="http://www.jquery2dotnet.com"><i class="glyphicon glyphicon-globe"></i></a> Sign up!</legend>
+                <legend><a href="http://www.jquery2dotnet.com"><i class="glyphicon glyphicon-globe"></i></a>Registrar</legend>
                 @using (Html.BeginForm())
                 {
                     <form action="#" method="post" class="form" role="form">
                         <div class="row">
                             <div class="col-xs-6 col-md-6">
-                                <input class="form-control" name="firstname" placeholder="First Name" type="text"
+                                <input class="form-control" name="firstname" placeholder="Primeiro nome" type="text"
                                        required autofocus />
                             </div>
                             <div class="col-xs-6 col-md-6">
-                                <input class="form-control" name="lastname" placeholder="Last Name" type="text" required />
+                                <input class="form-control" name="lastname" placeholder="Último nome" type="text" required />
                             </div>
                         </div>
-                        <input class="form-control" name="youremail" placeholder="Your Email" type="email" required />
-                        <input class="form-control" name="reenteremail" placeholder="Re-enter Email" type="email" required />
-                        <input class="form-control" name="password" placeholder="New Password" type="password" required />
+                        <input class="form-control" name="youremail" placeholder="E-mail" type="email" required />
+                        <input class="form-control" name="reenteremail" placeholder="Confirme seu e-mail" type="email" required />
+                        <input class="form-control" name="password" placeholder="Informe uma senha" type="password" required />
                         <label for="">
-                            Birth Date
+                            Data de nascimento
                         </label>
                         <div class="row">
                             <div class="col-xs-4 col-md-4">
@@ -36,28 +36,28 @@
                         <div>
                             <label class="radio-inline">
                                 <input type="radio" name="sexMasc" id="inlineCheckbox1" value="male" />
-                                Male
+                                Masculino
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="sexFemin" id="inlineCheckbox2" value="female" />
-                                Female
+                                Feminino
                             </label>
                         </div>
                         <br />
                         <div>
-                            <input type="text" name="wallet" placeholder="Enter your wallet" class="form-control" required />
+                            <input type="text" name="wallet" placeholder="Informe o endereço da sua carteira" class="form-control" required />
                         </div>
                         <br />
                         <div class="form-group">
                             @*@Html.CheckBoxFor(model => model.TermsAndConditions, false)
-                            @Html.LabelFor(model => model.TermsAndConditions)
-                            @Html.ValidationMessageFor(model => model.TermsAndConditions)*@
+                                @Html.LabelFor(model => model.TermsAndConditions)
+                                @Html.ValidationMessageFor(model => model.TermsAndConditions)*@
                         </div>
                         <button class="btn btn-sm btn-success " type="submit" onclick="window.location.href('@Url.Action("Index", "Home")')">
-                            Sign up
+                            Registrar
                         </button>
                         <button type="reset" class="btn btn-default btn-sm">
-                            Clear
+                            Limpar campos
                         </button>
                     </form>
                 }
@@ -65,3 +65,10 @@
         </div>
     </div>
 </body>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#myAccountBtn").hide();
+    </script>
+}

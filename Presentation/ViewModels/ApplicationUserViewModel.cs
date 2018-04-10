@@ -14,7 +14,7 @@ namespace Presentation.ViewModels
         //public string PhoneNumber { get; set; }
         //public string PhoneNumberConfirmed { get; set; }
 
-        //public virtual ICollection<Friendship> Friendships { get; set; }
+        public virtual ICollection<Friendship> Friends { get; set; }
         //public virtual ICollection<WalletViewModel> Wallets { get; set; }
         //public virtual ICollection<NotificationViewModel> Notifications { get; set; }
         public virtual ICollection<PostViewModel> Posts { get; set; }

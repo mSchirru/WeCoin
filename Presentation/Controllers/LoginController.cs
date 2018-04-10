@@ -8,13 +8,15 @@ namespace Presentation.Controllers
 
         public ActionResult Login()
         {
-            return View();
+            if (Session["userToken"] == null)
+                return View();
+            else
+                return RedirectToAction("Home", "User");
         }
 
         [HttpPost]
         public ActionResult Login(string email, string psw)
         {
-            //TODO: adicionar tratamento para o caso de não encontrar o usuário
             //TODO: implementar verificação nas páginas sobre um token ativo ou inativo
             string userToken = MVCUtils.GetUserToken(email, psw);
             
@@ -24,6 +26,7 @@ namespace Presentation.Controllers
                 return RedirectToAction("Home", "User");
             }
 
+            ViewBag.Message = "Senha incorreta ou usuário não encontrado";
             return View();
         }
     }

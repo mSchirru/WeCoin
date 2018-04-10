@@ -27,7 +27,9 @@ namespace Presentation
             HttpResponseMessage responseMessage = client.PostAsync("/Token", requestBody).Result;
 
             var jsonObject = JObject.Parse(responseMessage.Content.ReadAsStringAsync().Result);
-            return jsonObject.GetValue("access_token").ToString();
+            var userToken = jsonObject.GetValue("access_token");
+
+            return userToken != null ? userToken.ToString() : null;
         }
     }
 }
