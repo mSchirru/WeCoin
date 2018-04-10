@@ -20,7 +20,7 @@ namespace Data_Access.EF
                 .WillCascadeOnDelete(false);
 
             dbModelBuilder.Entity<ApplicationUser>()
-                .HasMany(e => e.Friendships1)
+                .HasMany(e => e.Friends)
                 .WithRequired(e => e.FromApplicationUser)
                 .HasForeignKey(e => e.FromApplicationUserId)
                 .WillCascadeOnDelete(false);
