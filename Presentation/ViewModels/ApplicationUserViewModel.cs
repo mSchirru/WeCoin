@@ -16,10 +16,10 @@ namespace Presentation.ViewModels
         //public string PhoneNumberConfirmed { get; set; }
         
         //public virtual ICollection<FriendshipViewModel> Friendships { get; set; }
-        public virtual ICollection<FriendshipViewModel> Friends { get; set; }
+        public ICollection<FriendshipViewModel> Friends { get; set; }
         //public virtual ICollection<WalletViewModel> Wallets { get; set; }
         //public virtual ICollection<NotificationViewModel> Notifications { get; set; }
-        public virtual ICollection<PostViewModel> Posts { get; set; }
+        public ICollection<PostViewModel> Posts { get; set; }
         //public virtual ICollection<ReactionViewModel> Reactions { get; set; }
     }
 }

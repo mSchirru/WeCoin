@@ -24,13 +24,14 @@ namespace Presentation.Controllers
             if (Session["userToken"] == null)
                 return RedirectToAction("Login", "Login");
 
-
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BASE_API_ADDRESS);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["userToken"].ToString());
+            
+            var y = client.GetStringAsync("api/ApplicationUser/GetLoggedUser").Result;
 
-            IEnumerable<ApplicationUserViewModel> appUsers = JsonConvert.DeserializeObject<IEnumerable<ApplicationUserViewModel>>(client.GetStringAsync("api/ApplicationUser").Result);      
+            //IEnumerable<ApplicationUserViewModel> appUsers = JsonConvert.DeserializeObject<IEnumerable<ApplicationUserViewModel>>(client.GetStringAsync("api/ApplicationUser").Result);
             return View();
         }
 
