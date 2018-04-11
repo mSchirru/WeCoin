@@ -1,8 +1,9 @@
 ﻿using Domain.Entities;
 using Microsoft.AspNet.Identity;
-using Newtonsoft.Json;
 using Services;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace API.Controllers
@@ -12,7 +13,18 @@ namespace API.Controllers
     {
         private readonly ApplicationUserService appUserService = new ApplicationUserService();
         
-        // GET api/values
+        //public ApplicationUser GetUserById()
+        //{
+        //    return View();
+        //}
+
+        [HttpGet]
+        public ApplicationUser GetLoggedUser()
+        {
+            return appUserService.GetUserById(User.Identity.GetUserId());
+        }
+
+        [HttpGet]
         public IEnumerable<ApplicationUser> GetUsers()
         {
             return appUserService.GetAll();
@@ -23,6 +35,11 @@ namespace API.Controllers
         {
             string userId = User.Identity.GetUserId();
             appUserService.CreateUserPost(userId, post);
+        }
+
+        public void EditUser(ApplicationUser appUser)
+        {
+            appUserService.EditUser(appUser);
         }
 
         //public ApplicationUser GetUser()

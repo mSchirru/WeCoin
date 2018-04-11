@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using Domain.Entities;
+using System.Web.Mvc;
 
 namespace API.Controllers
 {
@@ -7,7 +8,6 @@ namespace API.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-
             
             return View();
         }
