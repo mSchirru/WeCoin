@@ -60,30 +60,29 @@
                             @Html.DisplayNameFor(model => model.Posts)
                         </th>
                     </tr>
-                    @foreach (var item in Model.Friends)
+
+
+                    @*@Model.Friends*@
+                    @*@Model.Posts.First()*@
+                    
+                    @*@foreach (var item in Model.Friends)
                     {
-                        foreach (var item2 in item.)
+                        foreach (var item2 in item.ToApplicationUser.Posts)
                         {
-                            
+                            <tr>
+                                <td>
+                                    <img src="@Url.Content(item2.Content)" style="width: 50px; height: 50px;" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item2.ImageUri)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item2.PostTime)
+                                </td>
+                            </tr>
                         }
-                        <tr>
-                            <td>
-                                <img src="@Url.Content(item.ImgURL)" style="width: 50px; height: 50px;" />
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nome)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                            <td>
-                                @foreach (var item2 in item.Posts)
-                                {
-                                    @Html.DisplayFor(modelItem => item2.Content)
-                                }
-                            </td>
-                        </tr>
-                    }
+                    }*@
+
                 </table>
             </div>
         </div>
