@@ -21,6 +21,12 @@
                                 <input class="form-control" name="lastname" placeholder="Last Name" type="text" required />
                             </div>
                         </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ImgUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10"> 
+                                <input type="file" name="profilePhoto" />
+                            </div>
+                        </div>
                         <input class="form-control" name="youremail" placeholder="Your Email" type="email" required />
                         <input class="form-control" name="reenteremail" placeholder="Re-enter Email" type="email" required />
                         <input class="form-control" name="password" placeholder="New Password" type="password" required />
