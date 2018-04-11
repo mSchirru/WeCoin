@@ -20,6 +20,12 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        public ApplicationUser GetUserById(string userId)
+        {
+            return appUserService.GetUserById(userId);
+        }
+
+        [HttpGet]
         public IEnumerable<ApplicationUser> GetUsers()
         {
             return appUserService.GetUsers();
