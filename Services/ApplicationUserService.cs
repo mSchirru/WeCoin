@@ -12,19 +12,9 @@ namespace Services
     {
         private readonly ApplicationUserRepository Ar = new ApplicationUserRepository();
 
-        public ApplicationUser GetUserById(string id)
-        {
-            return Ar.GetUserById(id);
-        }
-
         public IEnumerable<ApplicationUser> GetAll()
         {
             return Ar.GetAll();
-        }
-
-        public void EditUser(ApplicationUser appUser)
-        {
-            Ar.EditUser(appUser);
         }
 
         public void CreateUserPost(string userId, Post post)
