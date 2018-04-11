@@ -13,11 +13,6 @@ namespace API.Controllers
     {
         private readonly ApplicationUserService appUserService = new ApplicationUserService();
         
-        //public ApplicationUser GetUserById()
-        //{
-        //    return View();
-        //}
-
         [HttpGet]
         public ApplicationUser GetLoggedUser()
         {
@@ -27,7 +22,13 @@ namespace API.Controllers
         [HttpGet]
         public IEnumerable<ApplicationUser> GetUsers()
         {
-            return appUserService.GetAll();
+            return appUserService.GetUsers();
+        }
+
+        public IEnumerable<ApplicationUser> GetUserFriends()
+        {
+            string userId = User.Identity.GetUserId();
+            return appUserService.GetUserFriends(userId);
         }
 
         [HttpPost]
@@ -37,32 +38,14 @@ namespace API.Controllers
             appUserService.CreateUserPost(userId, post);
         }
 
-        public void EditUser(ApplicationUser appUser)
+        [HttpPost]
+        public IHttpActionResult EditUser(ApplicationUser appUser)
         {
-            appUserService.EditUser(appUser);
+            //True quando algum objeto foi alterado na chamada de SaveChanges
+            if (appUserService.EditUser(appUser) > 0)
+                return Ok();
+            else
+                return BadRequest();
         }
-
-        //public ApplicationUser GetUser()
-
-        //// GET api/values/5
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        // POST api/values
-        //public void Post([FromBody]string value)
-        //{
-        //}
-
-        // PUT api/values/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        // DELETE api/values/5
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

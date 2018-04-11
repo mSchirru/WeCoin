@@ -17,14 +17,26 @@ namespace Services
             return Ar.GetUserById(id);
         }
 
-        public IEnumerable<ApplicationUser> GetAll()
+        public IEnumerable<ApplicationUser> GetUsers()
         {
             return Ar.GetAll();
         }
 
-        public void EditUser(ApplicationUser appUser)
+        public IEnumerable<ApplicationUser> GetUserFriends(string userId)
         {
-            Ar.EditUser(appUser);
+            //TODO: converter friendships numa lista de applicationusers
+            IEnumerable<Friendship> friendships = Ar.GetUserFriends(userId);
+            List<ApplicationUser> friends = new List<ApplicationUser>();
+
+            foreach (var friendship in friendships)
+                friends.Add(friendship.ToApplicationUser);
+
+            return friends;
+        }
+
+        public int EditUser(ApplicationUser appUser)
+        {
+            return Ar.EditUser(appUser);
         }
 
         public void CreateUserPost(string userId, Post post)

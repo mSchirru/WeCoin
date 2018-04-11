@@ -8,11 +8,14 @@
     }
     <div class="container text-center" style="margin-top: 3%">
         <div class="row">
-            <div class="col-sm-3 well">
+
+
+            <div class="col-sm-3">
                 <div class="well">
                     <img src="/padrao.png" class="img-circle" height="65" width="65" alt="Avatar">
-                    <p>@Html.ActionLink("My Profile", "Profile", "Home")</p>
+                    <p>@Html.ActionLink("Meu perfil", "Profile", "Home")</p>
                 </div>
+
                 <div class="well">
                     <p><a href="#">Interests</a></p>
                     <p>
@@ -30,61 +33,82 @@
                     People are looking at your profile. Find out who.
                 </div>
             </div>
-            <div class="col-sm-9">
-                <div class="well col-sm-6">
-                    <form class="form-horizontal" role="form">
-                        <h4>What's New</h4>
-                        <div class="form-group" style="padding: 14px;">
-                            <textarea class="form-control" placeholder="Update your status"></textarea>
-                        </div>
-                        <button class="btn btn-primary pull-right" type="button">Post</button><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+
+            <div class="col-sm-6">
+                @using (Html.BeginForm("CreateUserPost", "User"))
+                {
+                    @Html.AntiForgeryToken()
+                    <form class="form-horizontal well" role="form">
+                        <h4>O que é que há, velhinho?</h4>
+                        <textarea class="form-control input-lg" name="Content" style="min-width: 100%" placeholder="Dá o papo"></textarea>
+                        <input type="submit" value="Publicar" class="btn btn-primary pull-right" /><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
                     </form>
-                </div>
-                <div class="col-sm-4 well" style="margin-left: 5%">
+                }
+
+
+            </div>
+
+            <div class="form-horizontal">
+                <div class="col-sm-3">
                     <div class="thumbnail">
                         <p>MINERAR AQUI</p>
                     </div>
                 </div>
-                <table class="table col-sm-9">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ImgUrl)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Name)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Email)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Posts)
-                        </th>
-                    </tr>
-
-
-                    @*@Model.Friends*@
-                    @*@Model.Posts.First()*@
-                    
-                    @*@foreach (var item in Model.Friends)
-                    {
-                        foreach (var item2 in item.ToApplicationUser.Posts)
-                        {
-                            <tr>
-                                <td>
-                                    <img src="@Url.Content(item2.Content)" style="width: 50px; height: 50px;" />
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item2.ImageUri)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item2.PostTime)
-                                </td>
-                            </tr>
-                        }
-                    }*@
-
-                </table>
             </div>
+
         </div>
     </div>
+
+
+
+    @*<table class="table col-sm-9">*@
+    @*<tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImgUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts)
+            </th>
+        </tr>*@
+
+
+
+
+
+
+
+    @*@Model.Friends*@
+    @*@Model.Posts.First()*@
+
+    @*@foreach (var item in Model.Friends)
+        {
+            foreach (var item2 in item.ToApplicationUser.Posts)
+            {
+                <tr>
+                    <td>
+                        <img src="@Url.Content(item2.Content)" style="width: 50px; height: 50px;" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item2.ImageUri)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item2.PostTime)
+                    </td>
+                </tr>
+            }
+        }*@
+    @*</table>*@
 </body>
+
+@section Scripts
+{
+    <script>
+
+    </script>
+}
