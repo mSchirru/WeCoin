@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -14,6 +15,7 @@ namespace Domain.Entities
         public override string PasswordHash { get; set; }
         public override string SecurityStamp { get; set; }
         public string ImgUrl { get; set; }
+        public DateTime BirthDate { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
