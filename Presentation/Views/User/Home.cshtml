@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-6" style="text-align: center">
                 @using (Html.BeginForm("CreateUserPost", "User"))
                 {
                     @Html.AntiForgeryToken()
@@ -45,7 +45,26 @@
                     </form>
                 }
 
-
+                @foreach (var friend in Model.Friends)
+                {
+                    if (friend.ToApplicationUser.Posts.Count > 0)
+                    {
+                    <div class="row">
+                        <h4>Publicações dos seus amigos</h4>
+                        <div class="col-sm-3">
+                            <div class="well">
+                                <p>@friend.ToApplicationUser.Name</p>
+                                <img src="@friend.ToApplicationUser.ImgUrl" class="img-circle" height="55" width="55" alt="Avatar">
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="well">
+                                <p>@friend.ToApplicationUser.Posts.First().Content</p>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                }
             </div>
 
             <div class="form-horizontal">
@@ -58,52 +77,6 @@
 
         </div>
     </div>
-
-
-
-    @*<table class="table col-sm-9">*@
-    @*<tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ImgUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Posts)
-            </th>
-        </tr>*@
-
-
-
-
-
-
-
-    @*@Model.Friends*@
-    @*@Model.Posts.First()*@
-
-    @*@foreach (var item in Model.Friends)
-        {
-            foreach (var item2 in item.ToApplicationUser.Posts)
-            {
-                <tr>
-                    <td>
-                        <img src="@Url.Content(item2.Content)" style="width: 50px; height: 50px;" />
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item2.ImageUri)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item2.PostTime)
-                    </td>
-                </tr>
-            }
-        }*@
-    @*</table>*@
 </body>
 
 @section Scripts

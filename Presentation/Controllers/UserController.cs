@@ -2,9 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Mvc;
-using System.Collections.Generic;
 using System.Web;
-using AutoMapper;
 using Presentation.ViewModels;
 using Newtonsoft.Json;
 
@@ -66,6 +64,14 @@ namespace Presentation.Controllers
             try
             {
                 // TODO: Add insert logic here
+
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(BASE_API_ADDRESS);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["userToken"].ToString());
+
+                var j = client.PostAsJsonAsync("api/ApplicationUser/CreateUserPost", pvm).Result;
+
 
                 return RedirectToAction("Home", "User");
             }
