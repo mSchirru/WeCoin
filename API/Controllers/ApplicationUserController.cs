@@ -32,20 +32,25 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public void CreateUserPost(Post post)
+        public IHttpActionResult CreateUserPost(Post post)
         {
             string userId = User.Identity.GetUserId();
-            appUserService.CreateUserPost(userId, post);
+            
+            //True quando algum objeto for alterado na chamada de SaveChanges
+            if (appUserService.CreateUserPost(userId, post) > 0)
+                return Ok();
+            else
+                return InternalServerError();
         }
-
+        
         [HttpPost]
         public IHttpActionResult EditUser(ApplicationUser appUser)
         {
-            //True quando algum objeto foi alterado na chamada de SaveChanges
+            //True quando algum objeto for alterado na chamada de SaveChanges
             if (appUserService.EditUser(appUser) > 0)
                 return Ok();
             else
-                return BadRequest();
+                return InternalServerError();
         }
     }
 }

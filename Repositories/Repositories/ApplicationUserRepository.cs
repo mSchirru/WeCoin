@@ -33,9 +33,10 @@ namespace Repositories.Repositories
             return Rc.SaveChanges();
         }
 
-        public void CreateUserPost(string userId, Post post)
+        public int CreateUserPost(string userId, Post post)
         {
             Rc.Users.SingleOrDefault(u => u.Id == userId).Posts.Add(post);
+            return Rc.SaveChanges();
         }
     }
 }

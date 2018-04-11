@@ -39,9 +39,9 @@ namespace Services
             return Ar.EditUser(appUser);
         }
 
-        public void CreateUserPost(string userId, Post post)
+        public int CreateUserPost(string userId, Post post)
         {
-            Ar.CreateUserPost(userId, post);
+            return Ar.CreateUserPost(userId, post);
         }
     }
 }
