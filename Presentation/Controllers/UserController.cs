@@ -3,6 +3,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System.Web;
+using AutoMapper;
 using Presentation.ViewModels;
 using Newtonsoft.Json;
 
@@ -39,6 +41,21 @@ namespace Presentation.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Edit(ApplicationUserViewModel profile, HttpPostedFileBase profilePhoto)
+        {
+            if (ModelState.IsValid)
+            {
+                //---- Upload da Foto ----
+                profile.ImgUrl = Services.BlobService.GetInstance()
+                    .UploadFile("simplesocialnetwork", profile.Id, profilePhoto.InputStream, profilePhoto.ContentType);
+                //------------------------
+                //HttpClient 
+                return RedirectToAction("Index");
+            }
+
+            return View(profile);
+        }
         [HttpPost]
         public ActionResult CreatePost(PostViewModel pvm)
         {
