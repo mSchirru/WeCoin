@@ -19,13 +19,18 @@ namespace Repositories.Repositories
             return Rc.Users.Where(u => u.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
 
-        public void EditUser(ApplicationUser appUser)
+        public IEnumerable<Friendship> GetUserFriends(string userId)
+        {
+            return Rc.Users.SingleOrDefault(u => u.Id.Equals(userId)).Friends.ToList();
+        }
+
+        public int EditUser(ApplicationUser appUser)
         {
             ApplicationUser applicationUser = GetUserById(appUser.Id);
             applicationUser.Name = appUser.Name;
             applicationUser.Email = appUser.Email;
             applicationUser.ImgUrl = appUser.ImgUrl;
-            Rc.SaveChanges();
+            return Rc.SaveChanges();
         }
 
         public void CreateUserPost(string userId, Post post)

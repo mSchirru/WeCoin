@@ -16,11 +16,6 @@ namespace Presentation.Controllers
 
         public ActionResult Home()
         {
-            //if (Session["userToken"] == null)
-            //    return RedirectToAction("Login");
-
-            //return View();
-
             //TODO: a partir da lista de usuários, carregar posts relativos ao usuário logado
 
             if (Session["userToken"] == null)
@@ -31,41 +26,48 @@ namespace Presentation.Controllers
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["userToken"].ToString());
             
-            var y = client.GetStringAsync("api/ApplicationUser/GetLoggedUser").Result;
+            //Chamada para pegar todos os amigos de um usuário
+            //var z = client.GetStringAsync("api/ApplicationUser/GetUserFriends").Result;
 
-            //IEnumerable<ApplicationUserViewModel> appUsers = JsonConvert.DeserializeObject<IEnumerable<ApplicationUserViewModel>>(client.GetStringAsync("api/ApplicationUser").Result);
-            return View();
+            ApplicationUserViewModel appUser = JsonConvert.DeserializeObject<ApplicationUserViewModel>(client.GetStringAsync("api/ApplicationUser/GetLoggedUser").Result);
+            return View(appUser);
         }
 
         public ActionResult Edit()
         {
+            if (Session["userToken"] == null)
+                return RedirectToAction("Login", "Login");
+
             return View();
         }
 
         [HttpPost]
         public ActionResult Edit(ApplicationUserViewModel profile, HttpPostedFileBase profilePhoto)
         {
-            if (ModelState.IsValid)
-            {
-                //---- Upload da Foto ----
-                profile.ImgUrl = Services.BlobService.GetInstance()
-                    .UploadFile("simplesocialnetwork", profile.Id, profilePhoto.InputStream, profilePhoto.ContentType);
-                //------------------------
-                //HttpClient 
-                return RedirectToAction("Index");
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    //---- Upload da Foto ----
+            //    //TODO: corrigir upload no serviço de blob
+            //    profile.ImgUrl = Services.BlobService.GetInstance()
+            //        .UploadFile("simplesocialnetwork", profile.Id, profilePhoto.InputStream, profilePhoto.ContentType);
+            //    //------------------------
+            //    //HttpClient 
+            //    return RedirectToAction("Index");
+            //}
 
             return View(profile);
         }
+
         [HttpPost]
-        public ActionResult CreatePost(PostViewModel pvm)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateUserPost(PostViewModel pvm)
         {
             pvm.PostTime = DateTime.Now;
             try
             {
                 // TODO: Add insert logic here
 
-                return RedirectToAction("Home", "Home");
+                return RedirectToAction("Home", "User");
             }
             catch
             {
