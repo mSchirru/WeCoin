@@ -17,6 +17,6 @@ namespace Services
         {
             //Ar.CreateUserPost(userId, post);
             //TODO: criar notificações para os usuários
-        }
+        }   
     }
 }
