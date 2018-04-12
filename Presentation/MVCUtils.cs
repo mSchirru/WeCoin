@@ -36,6 +36,7 @@ namespace Presentation
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BASE_API_ADDRESS);
+            client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", userToken);
             return client;

@@ -9,24 +9,21 @@ namespace Presentation.Controllers
 {
     public class RegisterController : Controller
     {
-        private const string BASE_API_ADDRESS = "http://localhost:2539";
-
-        public void RegisterUser(string email, string name, string psw, string confirmationPsw)
+        private void RegisterUser(string email, string name, string psw, string confirmationPsw, DateTime date)
         {
             HttpClient client = new HttpClient();
-            const string apiEndpoint = "api/Account/Register";
-
-            client.BaseAddress = new Uri(BASE_API_ADDRESS);
+            client.BaseAddress = new Uri("http://localhost:2539");
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+         
             JObject requestBody = new JObject();
             requestBody.Add("Email", email);
             requestBody.Add("Name", name);
             requestBody.Add("Password", psw);
             requestBody.Add("ConfirmPassword", confirmationPsw);
+            requestBody.Add("Date", date);
 
-            client.PostAsJsonAsync(apiEndpoint, requestBody);
+            client.PostAsJsonAsync("api/Account/Register", requestBody);
             // TODO: implementar indicação do resultado do POST de cadastro
         }
 
@@ -38,16 +35,13 @@ namespace Presentation.Controllers
         [HttpPost]
         public ActionResult Register(ApplicationUserViewModel avm)
         {
-
-
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return View();
-            //}
-
             //TODO: registrar usuário e receber sinal de sucesso ou erro no cadastro
-            return View();
+            RegisterUser(avm.Email, avm.Name, avm.Password, avm.ConfirmPassword, avm.BirthDate);            
+
+            if (ModelState.IsValid)
+                return RedirectToAction("Login", "Login");
+
+            return View(avm);
         }
     }
 }

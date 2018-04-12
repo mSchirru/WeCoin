@@ -9,53 +9,26 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
                 <legend><a href="http://www.jquery2dotnet.com"><i class="glyphicon glyphicon-globe"></i></a>Registrar</legend>
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("Register", "Register"))
                 {
                     <form action="#" method="post" class="form" role="form">
-                        <div class="row">
-                            <div class="col-xs-6 col-md-6">
-                                <input class="form-control" name="firstname" placeholder="Primeiro nome" type="text"
-                                       required autofocus />
-                            </div>
-                            <div class="col-xs-6 col-md-6">
-                                <input class="form-control" name="lastname" placeholder="Último nome" type="text" required />
-                            </div>
-                        </div>
-                        <input class="form-control" name="youremail" placeholder="E-mail" type="email" required />
-                        <input class="form-control" name="reenteremail" placeholder="Confirme seu e-mail" type="email" required />
-                        <input class="form-control" name="password" placeholder="Informe uma senha" type="password" required />
+                        <input class="form-control" name="Name" placeholder="Digite seu nome" type="text" required autofocus />
+                        <br />
+                        <input class="form-control" name="Email" placeholder="E-mail" type="email" required />
+                        <br />
+                        <input class="form-control" name="Password" placeholder="Informe uma senha" type="password" required />
+                        <br />
+                        <input class="form-control" name="ConfirmPassword" placeholder="Informe uma senha" type="password" required />
                         <label for="">
                             Data de nascimento
                         </label>
                         <div class="row">
                             <div class="col-xs-4 col-md-4">
-                                <input id="date" type="date" name="date" required>
+                                <input id="date" type="date" name="BirthDate" required>
                             </div>
                         </div>
                         <br />
-                        <div>
-                            <label class="radio-inline">
-                                <input type="radio" name="sexMasc" id="inlineCheckbox1" value="male" />
-                                Masculino
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="sexFemin" id="inlineCheckbox2" value="female" />
-                                Feminino
-                            </label>
-                        </div>
-                        <br />
-                        <div>
-                            <input type="text" name="wallet" placeholder="Informe o endereço da sua carteira" class="form-control" required />
-                        </div>
-                        <br />
-                        <div class="form-group">
-                            @*@Html.CheckBoxFor(model => model.TermsAndConditions, false)
-                                @Html.LabelFor(model => model.TermsAndConditions)
-                                @Html.ValidationMessageFor(model => model.TermsAndConditions)*@
-                        </div>
-                        <button class="btn btn-sm btn-success " type="submit" onclick="window.location.href('@Url.Action("Index", "Home")')">
-                            Registrar
-                        </button>
+                        <input class="btn btn-sm btn-success " type="submit" value="Registrar" onclick="window.location.href(@Url.Action("Home", "User"))" />
                         <button type="reset" class="btn btn-default btn-sm">
                             Limpar campos
                         </button>

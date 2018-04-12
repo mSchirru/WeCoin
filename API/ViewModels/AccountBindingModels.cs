@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.ViewModels
 {
@@ -50,6 +52,11 @@ namespace API.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Digite a data de aniversário")]
+        [DataType(DataType.DateTime)]
+        [DisplayName("Data de Aniversário")]
+        public DateTime Date { get; set; }
     }
 
     public class RegisterExternalBindingModel
