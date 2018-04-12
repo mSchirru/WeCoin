@@ -32,33 +32,32 @@ namespace Repositories.Repositories
                 FromApplicationUserId = fromUserId,
                 ToApplicationUserId = toUserId
             };
-            
+
+            Friendship fp2 = new Friendship()
+            {
+                Accepted = false,
+                FromApplicationUserId = toUserId,
+                ToApplicationUserId = fromUserId
+            };
+
             GetUserById(fromUserId).Friends.Add(fp);
-            //Caso não funcione, manter apenas em Friends
-            GetUserById(toUserId).Friendships.Add(fp);
+            GetUserById(toUserId).Friends.Add(fp2);
 
             return Rc.SaveChanges();
         }
 
         public int AcceptUserFriendship(string fromUserId, string toUserId)
         {
-            Friendship fp = new Friendship()
-            {
-                Accepted = true,
-                FromApplicationUserId = fromUserId,
-                ToApplicationUserId = toUserId
-            };
-
-            //pegar friendship com accepted false?
             ApplicationUser appUser = Rc.Users.SingleOrDefault(u => u.Id.Equals(fromUserId));
+            ApplicationUser appUser2 = Rc.Users.SingleOrDefault(u => u.Id.Equals(toUserId));
+
             Friendship friendship = appUser.Friendships.SingleOrDefault(f => f.FromApplicationUserId.Equals(toUserId) &&
                                     f.ToApplicationUserId.Equals(fromUserId));
-
             friendship.Accepted = true;
-            
-            GetUserById(fromUserId).Friends.Add(fp);
-            //Caso não funcione, manter apenas em Friends
-            GetUserById(toUserId).Friendships.Add(fp);
+
+            Friendship friendship2 = appUser2.Friendships.SingleOrDefault(f => f.FromApplicationUserId.Equals(fromUserId) &&
+                                    f.ToApplicationUserId.Equals(toUserId));
+            friendship2.Accepted = true;
 
             return Rc.SaveChanges();
         }

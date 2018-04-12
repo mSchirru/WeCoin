@@ -42,6 +42,7 @@ namespace Services
                 Message = $"{GetUserById(fromUserId).Name} gostaria de ser seu amigo.",
                 NotificationTime = DateTime.Now,
                 WasRead = false,
+                NotificationIssuerId = fromUserId,
                 NotifiedApplicationUserId = toUserId
             };
 
@@ -58,6 +59,7 @@ namespace Services
                 Message = $"{GetUserById(fromUserId).Name} aceitou seu pedido de amizade.",
                 NotificationTime = DateTime.Now,
                 WasRead = false,
+                NotificationIssuerId = fromUserId,
                 NotifiedApplicationUserId = toUserId
             };
 
