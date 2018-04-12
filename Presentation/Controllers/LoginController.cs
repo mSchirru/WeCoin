@@ -7,8 +7,6 @@ namespace Presentation.Controllers
 {
     public class LoginController : Controller
     {
-        private const string BASE_API_ADDRESS = "http://localhost:2539";
-
         public ActionResult Login()
         {
             if (Session["userToken"] == null)
