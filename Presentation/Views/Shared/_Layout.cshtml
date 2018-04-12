@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/Notification.css")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -30,6 +31,17 @@
                             </span>
                         </div>
                     </form>*@
+                <ul class="nav navbar-nav navbar-right" id="notificationBtn" name="notificationBtn">
+                    <li id="notifications">
+                        <span id="counter">!</span>
+                        <div id="notification_bar" style="border: 2px solid;background-color:cornflowerblue;text-align:center">
+                            <div id="arrowUp"></div>
+                            <div id="notification_bar_header">
+                                <strong>Notificações</strong>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right" id="myAccountBtn">
                     <li>@Html.ActionLink("Minhas informações", "Edit", "User")</li>
                 </ul>
@@ -46,5 +58,18 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#notifications").click(function () {
+                $("#notification_bar").fadeIn(200);
+                return false;
+            });
+
+            $(document).click(function () {
+                $("#notification_bar").fadeOut("fast");
+            });
+        });
+    </script>
 </body>
 </html>

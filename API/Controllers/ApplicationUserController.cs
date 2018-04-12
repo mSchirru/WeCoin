@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json.Linq;
 using Services;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -48,7 +49,25 @@ namespace API.Controllers
             else
                 return InternalServerError();
         }
-        
+
+        [HttpPost]
+        public IHttpActionResult RequestUserFriendship(JObject jObj)
+        {
+            string fromUserId = User.Identity.GetUserId();
+            appUserService.RequestUserFriendship(fromUserId, jObj["toUserId"].ToString());
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public IHttpActionResult AcceptUserFriendship(JObject jObj)
+        {
+            string fromUserId = User.Identity.GetUserId();
+            appUserService.AcceptUserFriendship(fromUserId, jObj["toUserId"].ToString());
+
+            return Ok();
+        }
+
         [HttpPost]
         public IHttpActionResult EditUser(ApplicationUser appUser)
         {

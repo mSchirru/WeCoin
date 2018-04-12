@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Presentation.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,10 @@ namespace Presentation.Controllers
     {
         public ActionResult Details(string userId)
         {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["userToken"].ToString());
+            if (Session["userToken"] == null)
+                return RedirectToAction("Login", "Login");
+
+            HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
             
             //Criação de requisição GET com query strings
             UriBuilder endpoint = new UriBuilder("http://localhost:2539/api/ApplicationUser/GetUserById");
@@ -27,9 +29,22 @@ namespace Presentation.Controllers
         }
 
         
-        public ActionResult MakeFriendshipRequest()
+        public ActionResult MakeFriendshipRequest(string toUserId)
         {
-            return View();
+            if (Session["userToken"] == null)
+                return RedirectToAction("Login", "Login");
+
+            if (toUserId.Equals(Session["userId"]))
+                return RedirectToAction("Details", "UserProfile", routeValues: new { userId = toUserId });
+
+            HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
+
+            JObject requestBody = new JObject();
+            requestBody["toUserId"] = toUserId;
+
+            var j = client.PostAsJsonAsync("api/ApplicationUser/RequestUserFriendship", requestBody).Result;
+
+            return RedirectToAction("Details", "UserProfile", routeValues: new { userId = toUserId });
         }
 
         // GET: UserProfile/Edit/5
@@ -45,28 +60,6 @@ namespace Presentation.Controllers
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UserProfile/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: UserProfile/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             }

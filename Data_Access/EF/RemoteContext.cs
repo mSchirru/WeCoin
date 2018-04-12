@@ -42,7 +42,7 @@ namespace Data_Access.EF
             dbModelBuilder.Entity<Notification>()
                 .HasRequired(n => n.NotifiedApplicationUser)
                 .WithMany(u => u.Notifications)
-                .HasForeignKey(n => n.ApplicationUserId)
+                .HasForeignKey(n => n.NotifiedApplicationUserId)
                 .WillCascadeOnDelete(false);
 
             dbModelBuilder.Entity<Post>()

@@ -12,8 +12,8 @@
 
             <div class="col-sm-3">
                 <div class="well">
-                    <img src="/padrao.png" class="img-circle" height="65" width="65" alt="Avatar">
-                    <p>@Html.ActionLink("Meu perfil", "Profile", "Home")</p>
+                    <img src="@Model.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar">
+                    <p>@Html.ActionLink("Meu perfil", "Details", "UserProfile", routeValues: new { userId = Model.Id }, htmlAttributes: null)</p>
                 </div>
 
                 <div class="well">
@@ -49,20 +49,20 @@
                 {
                     if (friend.ToApplicationUser.Posts.Count > 0)
                     {
-                    <div class="row">
-                        <h4>Publicações dos seus amigos</h4>
-                        <div class="col-sm-3">
-                            <div class="well">
-                                <p>@friend.ToApplicationUser.Name</p>
-                                <img src="@friend.ToApplicationUser.ImgUrl" class="img-circle" height="55" width="55" alt="Avatar">
+                        <div class="row">
+                            <h4>Publicações dos seus amigos</h4>
+                            <div class="col-sm-3">
+                                <div class="well">
+                                    <p>@friend.ToApplicationUser.Name</p>
+                                    <img src="@friend.ToApplicationUser.ImgUrl" class="img-circle" height="55" width="55" alt="Avatar">
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="well">
+                                    <p>@friend.ToApplicationUser.Posts.First().Content</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-9">
-                            <div class="well">
-                                <p>@friend.ToApplicationUser.Posts.First().Content</p>
-                            </div>
-                        </div>
-                    </div>
                     }
                 }
             </div>
@@ -75,6 +75,18 @@
                 </div>
             </div>
 
+            <div id="userNotifications">
+                @foreach (var notification in Model.Notifications)
+                {
+                    <br />
+                    <br />
+                    <div style='width:100%;background:coral'><p>@notification.Message</p></div>
+                    //TODO: adicionar requisição aos botões
+                    <button style='width:45%' type='button' class='btn btn-success btn-sm'>Aceitar</button>
+                    <button style='width:45%' type='button' class='btn btn-danger btn-sm'>Recusar</button>
+                }
+            </div>
+
         </div>
     </div>
 </body>
@@ -82,6 +94,6 @@
 @section Scripts
 {
     <script>
-
+        $("#notification_bar").append($("#userNotifications"));
     </script>
 }

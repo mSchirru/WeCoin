@@ -4,7 +4,7 @@ namespace Domain.Interfaces.Repositories
 {
     public interface IBaseRepository<T> where T : class
     {
-        void Add(T obj);
+        int Add(T obj);
 
         T GetById(int id);
 
