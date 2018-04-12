@@ -34,7 +34,7 @@ namespace Presentation.Controllers
 
             var j = client.PostAsJsonAsync("api/ApplicationUser/AcceptUserFriendship", requestBody).Result;
 
-            return View();
+            return RedirectToAction("Home", "User");
         }
 
         public ActionResult Edit()
@@ -71,6 +71,12 @@ namespace Presentation.Controllers
 
             var POSTResult = client.PostAsJsonAsync("api/ApplicationUser/CreateUserPost", pvm).Result;
             return RedirectToAction("Home", "User");
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login", "Login");
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Presentation.ViewModels
         //public virtual ICollection<FriendshipViewModel> Friendships { get; set; }
         public ICollection<FriendshipViewModel> Friends { get; set; }
         //public virtual ICollection<WalletViewModel> Wallets { get; set; }
-        public virtual ICollection<NotificationViewModel> Notifications { get; set; }
+        public ICollection<NotificationViewModel> Notifications { get; set; }
         public ICollection<PostViewModel> Posts { get; set; }
         //public virtual ICollection<ReactionViewModel> Reactions { get; set; }
     }
