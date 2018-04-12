@@ -11,6 +11,7 @@ namespace Services
     public class ApplicationUserService
     {
         private readonly ApplicationUserRepository Ar = new ApplicationUserRepository();
+        private readonly NotificationRepository Nr = new NotificationRepository();
 
         public ApplicationUser GetUserById(string id)
         {
@@ -32,6 +33,37 @@ namespace Services
                 friends.Add(friendship.ToApplicationUser);
 
             return friends;
+        }
+
+        public int RequestUserFriendship(string fromUserId, string toUserId)
+        {
+            Notification notification = new Notification()
+            {
+                Message = $"{GetUserById(fromUserId).Name} gostaria de ser seu amigo.",
+                NotificationTime = DateTime.Now,
+                WasRead = false,
+                NotifiedApplicationUserId = toUserId
+            };
+
+            Nr.Add(notification);
+
+            return Ar.RequestUserFriendship(fromUserId, toUserId);
+        }
+
+        //Ids agora invertidos: quem recebeu o pedido em from, quem requisitou em to
+        public int AcceptUserFriendship(string fromUserId, string toUserId)
+        {
+            Notification notification = new Notification()
+            {
+                Message = $"{GetUserById(fromUserId).Name} aceitou seu pedido de amizade.",
+                NotificationTime = DateTime.Now,
+                WasRead = false,
+                NotifiedApplicationUserId = toUserId
+            };
+
+            Nr.Add(notification);
+
+            return Ar.AcceptUserFriendship(fromUserId, toUserId);
         }
 
         public int EditUser(ApplicationUser appUser)

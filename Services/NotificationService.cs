@@ -8,7 +8,7 @@ namespace Services
     {
         private readonly NotificationRepository Ar = new NotificationRepository();
 
-        public IEnumerable<Notification> GetAll()
+        public IEnumerable<Notification> GetNotifications()
         {
             return Ar.GetAll();
         }

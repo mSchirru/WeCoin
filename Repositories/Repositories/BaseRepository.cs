@@ -26,10 +26,10 @@ namespace Repositories.Repositories
             return Rc.Set<T>().ToList();
         }
 
-        public void Add(T obj)
+        public int Add(T obj)
         {
             Rc.Set<T>().Add(obj);
-            Rc.SaveChanges();
+            return Rc.SaveChanges();
         }
 
         public void Update(T obj)

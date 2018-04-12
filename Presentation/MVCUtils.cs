@@ -31,5 +31,16 @@ namespace Presentation
 
             return userToken != null ? userToken.ToString() : null;
         }
+
+        public static HttpClient GetClient(string userToken)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(BASE_API_ADDRESS);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", userToken);
+            return client;
+        }
+
+
     }
 }

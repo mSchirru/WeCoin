@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using Newtonsoft.Json;
+using Presentation.ViewModels;
+using System.Net.Http;
+using System.Web.Mvc;
 
 namespace Presentation.Controllers
 {
@@ -23,6 +26,11 @@ namespace Presentation.Controllers
             if (userToken != null)
             {
                 Session["userToken"] = userToken;
+
+                HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
+                ApplicationUserViewModel appUser = JsonConvert.DeserializeObject<ApplicationUserViewModel>(client.GetStringAsync("api/ApplicationUser/GetLoggedUser").Result);
+
+                Session["userId"] = appUser.Id;
                 return RedirectToAction("Home", "User");
             }
 

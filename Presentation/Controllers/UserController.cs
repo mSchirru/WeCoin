@@ -5,30 +5,36 @@ using System.Web.Mvc;
 using System.Web;
 using Presentation.ViewModels;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Presentation.Controllers
 {
     public class UserController : Controller
     {
-        private const string BASE_API_ADDRESS = "http://localhost:2539";
-
         public ActionResult Home()
         {
-            //TODO: a partir da lista de usuários, carregar posts relativos ao usuário logado
-
             if (Session["userToken"] == null)
                 return RedirectToAction("Login", "Login");
 
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(BASE_API_ADDRESS);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["userToken"].ToString());
-            
-            //Chamada para pegar todos os amigos de um usuário
-            //var z = client.GetStringAsync("api/ApplicationUser/GetUserFriends").Result;
+            HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
 
             ApplicationUserViewModel appUser = JsonConvert.DeserializeObject<ApplicationUserViewModel>(client.GetStringAsync("api/ApplicationUser/GetLoggedUser").Result);
             return View(appUser);
+        }
+
+        public ActionResult AcceptFriendshipRequest(string toUserId)
+        {
+            if (Session["userToken"] == null)
+                return RedirectToAction("Login", "Login");
+
+            HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
+
+            JObject requestBody = new JObject();
+            requestBody["toUserId"] = toUserId;
+
+            var j = client.PostAsJsonAsync("api/ApplicationUser/AcceptUserFriendship", requestBody).Result;
+
+            return View();
         }
 
         public ActionResult Edit()
@@ -47,7 +53,7 @@ namespace Presentation.Controllers
             //    //---- Upload da Foto ----
             //    //TODO: corrigir upload no serviço de blob
             //    profile.ImgUrl = Services.BlobService.GetInstance()
-            //        .UploadFile("simplesocialnetwork", profile.Id, profilePhoto.InputStream, profilePhoto.ContentType);
+            //        .UploadFile("wecoin", profile.Id, profilePhoto.InputStream, profilePhoto.ContentType);
             //    //------------------------
             //    //HttpClient 
             //    return RedirectToAction("Index");
@@ -61,24 +67,10 @@ namespace Presentation.Controllers
         public ActionResult CreateUserPost(PostViewModel pvm)
         {
             pvm.PostTime = DateTime.Now;
-            try
-            {
-                // TODO: Add insert logic here
+            HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
 
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(BASE_API_ADDRESS);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["userToken"].ToString());
-
-                var j = client.PostAsJsonAsync("api/ApplicationUser/CreateUserPost", pvm).Result;
-
-
-                return RedirectToAction("Home", "User");
-            }
-            catch
-            {
-                return View();
-            }
+            var POSTResult = client.PostAsJsonAsync("api/ApplicationUser/CreateUserPost", pvm).Result;
+            return RedirectToAction("Home", "User");
         }
     }
 }
