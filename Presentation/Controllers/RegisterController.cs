@@ -11,7 +11,7 @@ namespace Presentation.Controllers
     {
         private const string BASE_API_ADDRESS = "http://localhost:2539";
 
-        public void RegisterUser(string email, string name, string psw, string confirmationPsw)
+        public void RegisterUser(string email, string name, string psw, string confirmationPsw, DateTime date)
         {
             HttpClient client = new HttpClient();
             const string apiEndpoint = "api/Account/Register";
@@ -24,8 +24,11 @@ namespace Presentation.Controllers
             requestBody.Add("Email", email);
             requestBody.Add("Name", name);
             requestBody.Add("Password", psw);
-            requestBody.Add("ConfirmPassword", confirmationPsw);
+            //requestBody.Add("ConfirmPassword", confirmationPsw);  - ConfirmPassword não existe no Identity 
+                                                                      //então não vamos implementar
+            requestBody.Add("Date", date);
 
+            
             client.PostAsJsonAsync(apiEndpoint, requestBody);
             // TODO: implementar indicação do resultado do POST de cadastro
         }
