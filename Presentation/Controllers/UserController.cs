@@ -23,11 +23,17 @@ namespace Presentation.Controllers
 
         public ActionResult ListUsers()
         {
-            if (Session["userToken"] == null)
-                return RedirectToAction("Login", "Login");
-
-            HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
+            HttpClient client = MVCUtils.GetClient("");
             IEnumerable<ApplicationUserViewModel> appUsers = JsonConvert.DeserializeObject<IEnumerable<ApplicationUserViewModel>>(client.GetStringAsync("api/ApplicationUser/GetUsers").Result);
+
+            return View(appUsers);
+        }
+
+        [HttpPost]
+        public ActionResult ListFilteredUsers(string pSearch)
+        {
+            HttpClient client = MVCUtils.GetClient("");
+            IEnumerable<ApplicationUserViewModel> appUsers = JsonConvert.DeserializeObject<IEnumerable<ApplicationUserViewModel>>(client.GetStringAsync($"api/ApplicationUser/GetUsersByName?userName={pSearch}").Result);
 
             return View(appUsers);
         }

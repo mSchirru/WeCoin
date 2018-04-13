@@ -13,10 +13,9 @@ namespace Repositories.Repositories
             return Rc.Users.SingleOrDefault(u => u.Id.Equals(id));
         }
 
-        //utilizável com uma lista de procura AJAX
         public IEnumerable<ApplicationUser> GetUsersByName(string userName)
         {
-            return Rc.Users.Where(u => u.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            return Rc.Users.Where(u => u.UserName.ToLower().Contains(userName.ToLower())).ToList();
         }
 
         public IEnumerable<Friendship> GetUserFriends(string userId)

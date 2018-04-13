@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Presentation.ViewModels.ApplicationUserViewModel>
 
 @{
-    ViewBag.Title = "ListUsers";
+    ViewBag.Title = "ListFilteredUsers";
 }
 
-<h2>Usuários do site</h2>
+<h2>Usuários encontrados</h2>
 
 @using (Html.BeginForm("ListFilteredUsers", "User", FormMethod.Post))
 {
@@ -64,9 +64,3 @@
     }
 
 </table>
-
-
-@section Scripts
-{
-
-}

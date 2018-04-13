@@ -25,7 +25,6 @@ namespace Services
 
         public IEnumerable<ApplicationUser> GetUserFriends(string userId)
         {
-            //TODO: converter friendships numa lista de applicationusers
             IEnumerable<Friendship> friendships = Ar.GetUserFriends(userId);
             List<ApplicationUser> friends = new List<ApplicationUser>();
 
@@ -33,6 +32,11 @@ namespace Services
                 friends.Add(friendship.ToApplicationUser);
 
             return friends;
+        }
+
+        public IEnumerable<ApplicationUser> GetUsersByName(string userName)
+        {
+            return Ar.GetUsersByName(userName);
         }
 
         public int RequestUserFriendship(string fromUserId, string toUserId)

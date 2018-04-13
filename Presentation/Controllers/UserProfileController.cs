@@ -65,15 +65,15 @@ namespace Presentation.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["userToken"].ToString());
 
             MemoryStream ms = new MemoryStream();
-            
+
             if (profilePhoto != null)
             {
                 profilePhoto.InputStream.CopyTo(ms);
                 ms.Position = 0;
+                content.Add(new StreamContent(ms), "userPhoto", profilePhoto.FileName);
+                content.Add(new StringContent(profilePhoto.ContentType), "contentType");
             }
-                
-            content.Add(new StreamContent(ms), "userPhoto", profilePhoto.FileName);
-            content.Add(new StringContent(profilePhoto.ContentType), "contentType");
+            
             content.Add(new StringContent(avm.Id), "Id");
             content.Add(new StringContent(avm.Name), "Name");
             content.Add(new StringContent(avm.Email), "Email");

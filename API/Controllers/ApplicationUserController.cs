@@ -28,6 +28,14 @@ namespace API.Controllers
             return appUserService.GetUserById(userId);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public IEnumerable<ApplicationUser> GetUsersByName(string userName)
+        {
+            return appUserService.GetUsersByName(userName);
+        }
+
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<ApplicationUser> GetUsers()
         {
@@ -75,11 +83,10 @@ namespace API.Controllers
         public async Task<IHttpActionResult> EditUser()
         {
             HttpPostedFile userPhoto = HttpContext.Current.Request.Files[0];
+
             string appData = HttpContext.Current.Server.MapPath("~/App_Data");
             var provider = new MultipartFormDataStreamProvider(appData);
             provider = await Request.Content.ReadAsMultipartAsync(provider);
-
-            var imageUrl = BlobService.GetUploadedFile("wecoin", provider.FormData["Id"], userPhoto.InputStream, provider.FormData["contentType"]);
 
             ApplicationUser appUser = new ApplicationUser()
             {
@@ -87,9 +94,14 @@ namespace API.Controllers
                 Name = provider.FormData["Name"],
                 Email = provider.FormData["Email"],
                 BirthDate = DateTime.Parse(provider.FormData["BirthDate"]),
-                WalletAddress = provider.FormData["WalletAddress"],
-                ImgUrl = imageUrl
+                WalletAddress = provider.FormData["WalletAddress"]
             };
+
+            if (userPhoto != null)
+            {
+                var imageUrl = BlobService.GetUploadedFile("wecoin", provider.FormData["Id"], userPhoto.InputStream, provider.FormData["contentType"]);
+                appUser.ImgUrl = imageUrl;
+            }
             
             if (appUserService.EditUser(appUser) > 0)
                 return Ok();
