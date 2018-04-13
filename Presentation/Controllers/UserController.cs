@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Web.Mvc;
-using System.Web;
 using Presentation.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace Presentation.Controllers
 {
@@ -21,6 +20,18 @@ namespace Presentation.Controllers
             ApplicationUserViewModel appUser = JsonConvert.DeserializeObject<ApplicationUserViewModel>(client.GetStringAsync("api/ApplicationUser/GetLoggedUser").Result);
             return View(appUser);
         }
+
+        public ActionResult ListUsers()
+        {
+            if (Session["userToken"] == null)
+                return RedirectToAction("Login", "Login");
+
+            HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
+            IEnumerable<ApplicationUserViewModel> appUsers = JsonConvert.DeserializeObject<IEnumerable<ApplicationUserViewModel>>(client.GetStringAsync("api/ApplicationUser/GetUsers").Result);
+
+            return View(appUsers);
+        }
+
 
         public ActionResult AcceptFriendshipRequest(string toUserId)
         {

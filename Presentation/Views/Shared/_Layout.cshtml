@@ -20,17 +20,6 @@
                 @Html.ActionLink("WeCoin", "Login", "Login", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                @* TODO: acertar barra de busca quebrando linha *@
-                @*<form class="navbar-form" role="search">
-            <div class="input-group" id="searchComponent">
-                <input type="text" class="form-control navbar-right" placeholder="Search..">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div>
-        </form>*@
                 <ul class="nav navbar-nav navbar-right" id="logoutBtn">
                     <li>@Html.ActionLink("Deslogar", "Logout", "User")</li>
                 </ul>
@@ -44,6 +33,9 @@
                             </div>
                         </div>
                     </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="myAccountBtn">
+                    <li>@Html.ActionLink("Pesquisar usuários", "ListUsers", "User", routeValues: new { userId = Session["userId"] }, htmlAttributes: null)</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" id="myAccountBtn">
                     <li>@Html.ActionLink("Minhas informações", "Edit", "UserProfile", routeValues: new { userId = Session["userId"] }, htmlAttributes: null)</li>
