@@ -2,9 +2,11 @@
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
 using Services;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace API.Controllers
@@ -68,10 +70,27 @@ namespace API.Controllers
             return Ok();
         }
 
+
         [HttpPost]
-        public IHttpActionResult EditUser(ApplicationUser appUser)
+        public async Task<IHttpActionResult> EditUser()
         {
-            //True quando algum objeto for alterado na chamada de SaveChanges
+            HttpPostedFile userPhoto = HttpContext.Current.Request.Files[0];
+            string appData = HttpContext.Current.Server.MapPath("~/App_Data");
+            var provider = new MultipartFormDataStreamProvider(appData);
+            provider = await Request.Content.ReadAsMultipartAsync(provider);
+
+            var imageUrl = BlobService.GetUploadedFile("wecoin", provider.FormData["Id"], userPhoto.InputStream, provider.FormData["contentType"]);
+
+            ApplicationUser appUser = new ApplicationUser()
+            {
+                Id = provider.FormData["Id"],
+                Name = provider.FormData["Name"],
+                Email = provider.FormData["Email"],
+                BirthDate = DateTime.Parse(provider.FormData["BirthDate"]),
+                WalletAddress = provider.FormData["WalletAddress"],
+                ImgUrl = imageUrl
+            };
+            
             if (appUserService.EditUser(appUser) > 0)
                 return Ok();
             else

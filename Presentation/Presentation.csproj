@@ -200,7 +200,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\User\Home.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\UserProfile\Edit.cshtml" />
     <Content Include="Views\UserProfile\Details.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
   </ItemGroup>
