@@ -54,7 +54,7 @@
                             <div class="col-sm-3">
                                 <div class="well">
                                     <p>@friend.ToApplicationUser.Name</p>
-                                    <img src="@friend.ToApplicationUser.ImgUrl" class="img-circle" height="55" width="55" alt="Avatar">
+                                    <a href="@Url.Action("Details", "UserProfile")?userId=@friend.ToApplicationUser.Id"><img src="@friend.ToApplicationUser.ImgUrl" class="img-circle" height="55" width="55" alt="Avatar" /></a>
                                 </div>
                             </div>
                             <div class="col-sm-9">

@@ -19,8 +19,8 @@
             <div class="col-sm-9">
                 <h4><small>Publicações recentes</small></h4>
                 <hr>
-                @for (int i = 0; i < 2; i++)
-                {
+                @for (int i = Model.Posts.Count - 2; i < Model.Posts.Count; i++)
+                {//TODO: checar possibilidade do usuário não ter um ou mais posts para exibição
                     <h5><span class="glyphicon glyphicon-time"></span> Publicado em @Model.Posts.ElementAt(i).PostTime</h5>
                     <p>@Model.Posts.ElementAt(i).Content</p>
                     <br><br>
@@ -29,3 +29,10 @@
         </div>
     </div>
 </body>
+
+@section Scripts
+{
+    <script>
+        $("#notificationBtn").hide();
+    </script>    
+}

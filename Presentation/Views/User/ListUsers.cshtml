@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Presentation.ViewModels.ApplicationUserViewModel>
+
+@{
+    ViewBag.Title = "ListUsers";
+}
+
+<h2>Usuários do site</h2>
+
+<p>
+    @* TODO: acertar barra de busca quebrando linha *@
+    @*<form class="navbar-form" role="search">
+            <div class="input-group" id="searchComponent">
+                <input type="text" class="form-control navbar-right" placeholder="Search..">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </form>*@
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImgUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WalletAddress)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="@Url.Action("Details", "UserProfile")?userId=@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.ImgUrl)" class="img-circle" height="65" width="65" alt="Avatar"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WalletAddress)
+        </td>
+    </tr>
+}
+
+</table>
