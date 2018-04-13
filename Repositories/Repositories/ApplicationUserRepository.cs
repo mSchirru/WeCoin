@@ -65,8 +65,11 @@ namespace Repositories.Repositories
         public int EditUser(ApplicationUser appUser)
         {
             ApplicationUser applicationUser = GetUserById(appUser.Id);
+
             applicationUser.Name = appUser.Name;
             applicationUser.Email = appUser.Email;
+            applicationUser.BirthDate = appUser.BirthDate;
+            applicationUser.WalletAddress = appUser.WalletAddress;
             applicationUser.ImgUrl = appUser.ImgUrl;
             return Rc.SaveChanges();
         }

@@ -61,12 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\ApplicationUser.cs" />
-    <Compile Include="Entities\Coin.cs" />
     <Compile Include="Entities\Friendship.cs" />
     <Compile Include="Entities\Notification.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\Reaction.cs" />
-    <Compile Include="Entities\Wallet.cs" />
     <Compile Include="Interfaces\Repositories\IApplicationUserRepository.cs" />
     <Compile Include="Interfaces\Repositories\IBaseRepository.cs" />
     <Compile Include="Interfaces\Repositories\INotificationRepository.cs" />
