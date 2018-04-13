@@ -37,31 +37,6 @@ namespace Presentation.Controllers
             return RedirectToAction("Home", "User");
         }
 
-        public ActionResult Edit()
-        {
-            if (Session["userToken"] == null)
-                return RedirectToAction("Login", "Login");
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Edit(ApplicationUserViewModel profile, HttpPostedFileBase profilePhoto)
-        {
-            //if (ModelState.IsValid)
-            //{
-            //    //---- Upload da Foto ----
-            //    //TODO: corrigir upload no serviço de blob
-            //    profile.ImgUrl = Services.BlobService.GetInstance()
-            //        .UploadFile("wecoin", profile.Id, profilePhoto.InputStream, profilePhoto.ContentType);
-            //    //------------------------
-            //    //HttpClient 
-            //    return RedirectToAction("Index");
-            //}
-
-            return View(profile);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateUserPost(PostViewModel pvm)

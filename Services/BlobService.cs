@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
@@ -6,8 +7,10 @@ namespace Services
 {
     public class BlobService
     {
-        public CloudStorageAccount StorageAccount { get; private set; }
+        private CloudStorageAccount StorageAccount { get; set; }
         private static BlobService _instance;
+
+        private BlobService() { }
 
         private BlobService(CloudStorageAccount cloudStorage)
         {
@@ -15,14 +18,14 @@ namespace Services
             StorageAccount = cloudStorage;
         }
 
-        public static BlobService GetInstance()
+        private static BlobService GetInstance()
         {
             if (_instance == null)
                 _instance = new BlobService(Common.GetStorageAccount());
             return _instance;
         }
 
-        public String UploadFile(String container, String fileName, System.IO.Stream inputStream, String contentType)
+        private String UploadFile(String container, String fileName, System.IO.Stream inputStream, String contentType)
         {
             //Classe que faz acesso ao Azure Storage Blob
             CloudBlobClient blobClient = StorageAccount.CreateCloudBlobClient();
@@ -42,6 +45,11 @@ namespace Services
 
             //Blob URL
             return cloudBlockblob.Uri.ToString();
+        }
+
+        public static string GetUploadedFile(String container, String fileName, Stream inputStream, String contentType)
+        {
+            return GetInstance().UploadFile(container, fileName, inputStream, contentType);
         }
     }
 }

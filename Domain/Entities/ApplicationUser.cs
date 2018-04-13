@@ -16,7 +16,9 @@ namespace Domain.Entities
         public override string SecurityStamp { get; set; }
         public string ImgUrl { get; set; }
         public DateTime BirthDate { get; set; }
-
+        public string WalletAddress { get; set; }
+        public double CoinAmount { get; set; }
+        public double CoinQuote { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
@@ -32,12 +34,12 @@ namespace Domain.Entities
         public virtual bool ShouldSerializePhoneNumber() => true;
         public virtual bool ShouldSerializeUserName() => true;
         public virtual bool ShouldSerializeId() => true;
+        public virtual bool ShouldSerializeWalletAddress() => true;
         public virtual bool ShouldSerializePasswordHash() => false;
         public virtual bool ShouldSerializeSecurityStamp() => false;
 
         public virtual ICollection<Friendship> Friendships { get; set; }
         public virtual ICollection<Friendship> Friends { get; set; }
-        public virtual ICollection<Wallet> Wallets { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<Reaction> Reactions { get; set; }
