@@ -241,3 +241,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
+/API/App_Data
+/Presentation/App_Data
