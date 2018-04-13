@@ -25,20 +25,6 @@ namespace Data_Access.EF
                 .HasForeignKey(e => e.FromApplicationUserId)
                 .WillCascadeOnDelete(false);
 
-            dbModelBuilder.Entity<Wallet>()
-                .HasRequired(w => w.WalletOwner)
-                .WithMany(u => u.Wallets)
-                .HasForeignKey(w => w.ApplicationUserId)
-                .WillCascadeOnDelete(false);
-
-            dbModelBuilder.Entity<Wallet>()
-                .HasIndex(w => w.WalletAddress)
-                .IsUnique();
-
-            dbModelBuilder.Entity<Wallet>()
-                .Property(w => w.WalletAddress)
-                .HasMaxLength(300);
-
             dbModelBuilder.Entity<Notification>()
                 .HasRequired(n => n.NotifiedApplicationUser)
                 .WithMany(u => u.Notifications)
