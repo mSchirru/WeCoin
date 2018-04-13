@@ -204,6 +204,7 @@
     <Content Include="Views\UserProfile\Details.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\User\ListUsers.cshtml" />
+    <Content Include="Views\User\ListFilteredUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
