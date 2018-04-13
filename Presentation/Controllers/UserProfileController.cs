@@ -2,8 +2,8 @@
 using Newtonsoft.Json.Linq;
 using Presentation.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
@@ -47,26 +47,43 @@ namespace Presentation.Controllers
             return RedirectToAction("Details", "UserProfile", routeValues: new { userId = toUserId });
         }
 
-        // GET: UserProfile/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string userId)
         {
-            return View();
+            if (Session["userToken"] == null || !(userId.Equals(Session["userId"].ToString())))
+                return RedirectToAction("Login", "Login");
+
+            HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
+            ApplicationUserViewModel appUser = JsonConvert.DeserializeObject<ApplicationUserViewModel>(client.GetStringAsync($"api/ApplicationUser/GetUserById?userId={userId}").Result);
+            return View(appUser);
         }
 
-        // POST: UserProfile/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(ApplicationUserViewModel avm, HttpPostedFileBase profilePhoto)
         {
-            try
-            {
-                // TODO: Add update logic here
+            HttpClient client = new HttpClient();
+            var content = new MultipartFormDataContent("Upload----" + DateTime.Now.ToString(CultureInfo.InvariantCulture));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["userToken"].ToString());
 
-                return RedirectToAction("Index");
-            }
-            catch
+            MemoryStream ms = new MemoryStream();
+            
+            if (profilePhoto != null)
             {
-                return View();
+                profilePhoto.InputStream.CopyTo(ms);
+                ms.Position = 0;
             }
+                
+            content.Add(new StreamContent(ms), "userPhoto", profilePhoto.FileName);
+            content.Add(new StringContent(profilePhoto.ContentType), "contentType");
+            content.Add(new StringContent(avm.Id), "Id");
+            content.Add(new StringContent(avm.Name), "Name");
+            content.Add(new StringContent(avm.Email), "Email");
+            content.Add(new StringContent(avm.BirthDate.ToString()), "BirthDate");
+            content.Add(new StringContent(avm.WalletAddress), "WalletAddress");
+
+            //TODO: tratar requisição para saber o sucesso ou erro da edição
+            var message = client.PostAsync("http://localhost:2539/api/ApplicationUser/EditUser", content).Result;
+
+            return RedirectToAction("Home", "User");
         }
     }
 }
