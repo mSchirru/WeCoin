@@ -1,5 +1,7 @@
 ﻿using Domain.Entities;
+using Newtonsoft.Json.Linq;
 using Services;
+using System;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -9,10 +11,16 @@ namespace API.Controllers
     {
         private readonly NotificationService Ns = new NotificationService();
 
+        [AllowAnonymous]
         [HttpGet]
-        public IEnumerable<Notification> GetNotifications()
+        public IEnumerable<Notification> GetNotifications() => Ns.GetNotifications();
+
+        [Authorize]
+        [HttpPost]
+        public int DeleteNotification(JObject requestBody)
         {
-            return Ns.GetNotifications();
+            string s = requestBody["notificationId"].ToString();
+            return Ns.DeleteNotification(Int32.Parse(s));
         }
     }
 }

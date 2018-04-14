@@ -12,8 +12,8 @@ namespace Domain.Interfaces.Repositories
 
         IEnumerable<T> GetAll();
 
-        void Update(T obj);
+        int Update(T obj);
 
-        void Remove(T obj);
+        int Remove(T obj);
     }
 }

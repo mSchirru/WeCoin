@@ -6,6 +6,8 @@ namespace Data_Access.EF
 {
     public class RemoteContext : IdentityDbContext<ApplicationUser>
     {
+        public IDbSet<Notification> Notifications { get; set; }
+
         public static RemoteContext Create()
         {
             return new RemoteContext();

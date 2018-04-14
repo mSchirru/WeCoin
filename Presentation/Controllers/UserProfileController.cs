@@ -29,7 +29,7 @@ namespace Presentation.Controllers
         }
 
         
-        public ActionResult MakeFriendshipRequest(string toUserId)
+        public ActionResult RequestUserFriendship(string toUserId)
         {
             if (Session["userToken"] == null)
                 return RedirectToAction("Login", "Login");
