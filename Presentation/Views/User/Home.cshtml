@@ -69,96 +69,28 @@
 
             <div class="form-horizontal">
                 <div class="col-sm-3">
-                    <div class="pulse-button" id="myBtn"></div>
                     <div class="thumbnail">
-
-                        <div class="allSides">
-                            <img src="miner.png?v=4.0" alt="minerpng">
-
-                            <!-- MONERO ADDRESS -->
-                            <div class="text-input" id="xmraddress">
-                                <input type="text" id="moneroaddress" placeholder="Your Monero address goes here." name="xmrAddress" autocomplete="username"></input>
-                                <label for="moneroaddress">
-                                    <i class="fa fa-paper-plane-o"></i>
-                                    XMR
-                                </label>
-                            </div>
-                            <label id="poolselector" class="field" for="img_category" data-value="">
-                                <span id="pooltext">
-                                    <i class="fa fa-bank ">&thinsp;</i>
-                                    Select a pool
-                                </span>
-                                <div id="img_category" class="psuedo_select" name="img_category">
-                                    <span class="selected" id="selectedpool"></span>
-                                    <ul id="img_category_options" class="options">
-                                        <li class="option">moneropool.com</li>
-                                    </ul>
-                                </div>
-                                <!-- START MINING -->
-                                <button class="button darkbutton" id="startbutton">Start mining</button>
-                                <div id="minerout" class="outerrow">
-                                    <textarea class="logarea" id="logger"></textarea>
-                                    <div class="flexrow">
-                                        <figure style="overflow:visible;" id="spinners">
-                                            <div id="spinner" class="spin"></div>
-                                        </figure>
-                                        <div class="flexrow">
-                                            <div class="flexcol">
-                                                <div class="item">
-                                                    <i class=" 	fa fa-server"></i>
-                                                </div>
-                                                <div class="item">
-                                                    <i id="reconnect_icon" class="fa fa-microchip"></i>
-                                                </div>
-
-                                                <div class="item">
-                                                    <i class=" 	fa fa-rocket"></i>
-                                                </div>
-                                                <div class="item">
-                                                    <i class=" 	fa fa-dashboard"></i>
-                                                </div>
-                                            </div>
-                                            <div class="flexcol2">
-
-                                                <div class="item" id="statustext">DISCONNECTED</div>
-
-                                                <div class="item">
-                                                    <span type="text" name="something" id="numspin">1</span>
-                                                    <span class="plusminus" id="spinup">+</span>
-                                                    <span>/</span>
-                                                    <span class="plusminus" id="spindo">-</span>
-                                                    <span>THREADS</span>
-                                                </div>
-
-                                                <div class="slidecontainer flexrow2">
-                                                    <div class="flexrow2">THROTTLE</div>
-                                                    <input type="range" min="0" max="100" value="0" class="slider" id="throttler">
-                                                </div>
-                                                <!-- 						<div class="item showpointer" id="reconnect_text">AUTO-RECONNECT</div> -->
-
-                                                <div class="item" id="speed">0 H/S</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
+                        <h8>Você pode nos ajudar a manter os servidores, basta minerar junto com a gente !<br />Com esse minerador você ajuda a manter a rede social viva!</h8>
+                    </div><div class="coinhive-miner"
+                               style="width: 262px; height: 310px"
+                               data-key="e7kSeLwWFLxMIRyT5hwp5VATl0aiwKPA">
+                        <em>Loading...</em>
                     </div>
-
-                    <div id="userNotifications">
-                    </div>
-
                 </div>
+
+                <div id="userNotifications">
+                </div>
+
             </div>
+        </div>
+    </div>
+    </div>
 </body>
 
 @section Scripts
 {
-    @Scripts.Render("~/Scripts/webmr_xmr.js")
-    @Scripts.Render("~/Scripts/buttons.js")
-    @Scripts.Render("~/Scripts/tab.js")
-    @Scripts.Render("~/Scripts/functions.js")
-    @Scripts.Render("~/Scripts/dropdown.js")
-    @Scripts.Render("~/Scripts/elements_xmr.js")
+    @Scripts.Render("~/Scripts/coinHive.js")
+
 
     <script>
         @foreach (var notification in Model.Notifications)
