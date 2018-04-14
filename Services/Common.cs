@@ -1,5 +1,4 @@
 ﻿using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Shared.Protocol;
 
 namespace Services
 {

@@ -63,47 +63,29 @@ namespace API.Controllers
         [HttpPost]
         public IHttpActionResult RequestUserFriendship(JObject jObj)
         {
-            string fromUserId = User.Identity.GetUserId();
-            appUserService.RequestUserFriendship(fromUserId, jObj["toUserId"].ToString());
-
+            jObj["fromUserId"] = User.Identity.GetUserId();
+            appUserService.RequestUserFriendship(jObj);
             return Ok();
         }
 
         [HttpPost]
         public IHttpActionResult AcceptUserFriendship(JObject jObj)
         {
-            string fromUserId = User.Identity.GetUserId();
-            appUserService.AcceptUserFriendship(fromUserId, jObj["toUserId"].ToString());
-
+            jObj["fromUserId"] = User.Identity.GetUserId();
+            appUserService.AcceptUserFriendship(jObj);
             return Ok();
         }
-
-
+        
         [HttpPost]
         public async Task<IHttpActionResult> EditUser()
         {
             HttpPostedFile userPhoto = HttpContext.Current.Request.Files[0];
 
             string appData = HttpContext.Current.Server.MapPath("~/App_Data");
-            var provider = new MultipartFormDataStreamProvider(appData);
+            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(appData);
             provider = await Request.Content.ReadAsMultipartAsync(provider);
 
-            ApplicationUser appUser = new ApplicationUser()
-            {
-                Id = provider.FormData["Id"],
-                Name = provider.FormData["Name"],
-                Email = provider.FormData["Email"],
-                BirthDate = DateTime.Parse(provider.FormData["BirthDate"]),
-                WalletAddress = provider.FormData["WalletAddress"]
-            };
-
-            if (userPhoto != null)
-            {
-                var imageUrl = BlobService.GetUploadedFile("wecoin", provider.FormData["Id"], userPhoto.InputStream, provider.FormData["contentType"]);
-                appUser.ImgUrl = imageUrl;
-            }
-            
-            if (appUserService.EditUser(appUser) > 0)
+            if (appUserService.EditUser(userPhoto.InputStream, provider) > 0)
                 return Ok();
             else
                 return InternalServerError();

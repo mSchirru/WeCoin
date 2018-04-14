@@ -32,16 +32,16 @@ namespace Repositories.Repositories
             return Rc.SaveChanges();
         }
 
-        public void Update(T obj)
+        public int Update(T obj)
         {
             Rc.Entry(obj).State = EntityState.Modified;
-            Rc.SaveChanges();
+            return Rc.SaveChanges();
         }
 
-        public void Remove(T obj)
+        public int Remove(T obj)
         {
             Rc.Set<T>().Remove(obj);
-            Rc.SaveChanges();
+            return Rc.SaveChanges();
         }
 
         public void Dispose()

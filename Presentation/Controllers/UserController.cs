@@ -39,7 +39,7 @@ namespace Presentation.Controllers
         }
 
 
-        public ActionResult AcceptFriendshipRequest(string toUserId)
+        public ActionResult AcceptFriendshipRequest(string toUserId, string notificationId, string notificationMessage)
         {
             if (Session["userToken"] == null)
                 return RedirectToAction("Login", "Login");
@@ -48,10 +48,18 @@ namespace Presentation.Controllers
 
             JObject requestBody = new JObject();
             requestBody["toUserId"] = toUserId;
+            requestBody["notificationId"] = notificationId;
+
+            //"..aceitou seu pedido de amizade"
+            if (notificationMessage.Contains("amizade"))
+            {
+                HttpResponseMessage httpMessage = client.PostAsJsonAsync("api/Notification/DeleteNotification", requestBody).Result;
+                return View();
+            }
 
             var j = client.PostAsJsonAsync("api/ApplicationUser/AcceptUserFriendship", requestBody).Result;
 
-            return RedirectToAction("Home", "User");
+            return View();
         }
 
         [HttpPost]

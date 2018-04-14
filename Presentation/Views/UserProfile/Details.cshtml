@@ -11,7 +11,7 @@
                 <img src="@Model.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar">
                 <h4> @Model.Name </h4>
                 <button type="button" class="btn btn-light">
-                    @Html.ActionLink("Enviar pedido de amizade", "MakeFriendshipRequest", "UserProfile", routeValues: new { toUserId = Model.Id }, htmlAttributes: null)
+                    @Html.ActionLink("Enviar pedido de amizade", "RequestUserFriendship", "UserProfile", routeValues: new { toUserId = Model.Id }, htmlAttributes: null)
                 </button>
                 <input type="hidden" value="@Model.Id" />
             </div>
@@ -20,12 +20,21 @@
                 <h4><small>Publicações recentes</small></h4>
                 <hr>
                 @{
-                    var posts = Model.Posts.OrderByDescending(p => p.PostTime);
-
-                    for (int i = 0; i < 2; i++)
+                    if (Model.Posts.Count > 1)
                     {
-                        <h5><span class="glyphicon glyphicon-time"></span> Publicado em @posts.ElementAt(i).PostTime</h5>
-                        <p>@posts.ElementAt(i).Content</p>
+                        var posts = Model.Posts.OrderByDescending(p => p.PostTime);
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            <h5><span class="glyphicon glyphicon-time"></span> Publicado em @posts.ElementAt(i).PostTime</h5>
+                            <p>@posts.ElementAt(i).Content</p>
+                            <br><br>
+                        }
+                    }
+                    else if (Model.Posts.Count == 1)
+                    {
+                        <h5><span class="glyphicon glyphicon-time"></span> Publicado em @Model.Posts.First().PostTime</h5>
+                        <p>@Model.Posts.First().Content</p>
                         <br><br>
                     }
                 }

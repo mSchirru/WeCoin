@@ -1,22 +1,19 @@
 ﻿using Domain.Entities;
 using Repositories.Repositories;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Services
 {
     public class NotificationService
     {
-        private readonly NotificationRepository Ar = new NotificationRepository();
+        private readonly NotificationRepository Nr = new NotificationRepository();
 
-        public IEnumerable<Notification> GetNotifications()
-        {
-            return Ar.GetAll();
-        }
+        public IEnumerable<Notification> GetNotifications() => Nr.GetAll();
 
-        public void CreateNotification(string userId, Post post)
-        {
-            //Ar.CreateUserPost(userId, post);
-            //TODO: criar notificações para os usuários
-        }   
+        public int DeleteNotification(int notificationId) => Nr.RemoveNotification(notificationId);
     }
 }

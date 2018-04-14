@@ -25,7 +25,7 @@ namespace Services
             return _instance;
         }
 
-        private String UploadFile(String container, String fileName, System.IO.Stream inputStream, String contentType)
+        private String UploadFile(String container, String fileName, Stream inputStream, String contentType)
         {
             //Classe que faz acesso ao Azure Storage Blob
             CloudBlobClient blobClient = StorageAccount.CreateCloudBlobClient();
