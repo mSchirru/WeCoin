@@ -79,16 +79,29 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> EditUser()
         {
-            HttpPostedFile userPhoto = HttpContext.Current.Request.Files[0];
+            HttpPostedFile userPhoto = null;
+
+            if (HttpContext.Current.Request.Files.Count > 0)
+                userPhoto = HttpContext.Current.Request.Files[0];
 
             string appData = HttpContext.Current.Server.MapPath("~/App_Data");
             MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(appData);
             provider = await Request.Content.ReadAsMultipartAsync(provider);
 
-            if (appUserService.EditUser(userPhoto.InputStream, provider) > 0)
-                return Ok();
+            if (userPhoto != null)
+            {
+                if (appUserService.EditUser(userPhoto.InputStream, provider) > 0)
+                    return Ok();
+                else
+                    return InternalServerError();
+            }
             else
-                return InternalServerError();
+            {
+                if (appUserService.EditUser(provider) > 0)
+                    return Ok();
+                else
+                    return InternalServerError();
+            }
         }
     }
 }

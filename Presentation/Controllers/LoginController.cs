@@ -18,7 +18,6 @@ namespace Presentation.Controllers
         [HttpPost]
         public ActionResult Login(string email, string psw)
         {
-            //TODO: implementar verificação nas páginas sobre um token ativo ou inativo
             string userToken = MVCUtils.GetUserToken(email, psw);
             
             if (userToken != null)
