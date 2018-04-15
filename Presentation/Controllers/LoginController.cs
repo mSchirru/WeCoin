@@ -28,6 +28,8 @@ namespace Presentation.Controllers
                 ApplicationUserViewModel appUser = JsonConvert.DeserializeObject<ApplicationUserViewModel>(client.GetStringAsync("api/ApplicationUser/GetLoggedUser").Result);
 
                 Session["userId"] = appUser.Id;
+                Session["userPhoto"] = appUser.ImgUrl;
+                Session["userName"] = appUser.UserName;
                 return RedirectToAction("Home", "User");
             }
 
