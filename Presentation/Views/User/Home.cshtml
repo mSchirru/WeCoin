@@ -6,7 +6,7 @@
         ViewBag.Title = "WeCoin - Home";
         Styles.Render("~/Content/PostList.css");
     }
-    <div class="container text-center" style="margin-top: 3%">
+    <div class="text-center" style="margin-top: 3%">
         <div class="row">
 
 
@@ -16,17 +16,24 @@
                     <p>@Html.ActionLink(Model.Name, "Details", "UserProfile", routeValues: new { userId = Model.Id }, htmlAttributes: null)</p>
                 </div>
 
-                <div class="well">
-                    <p><a href="#">Interesses</a></p>
-                    <p>
-                        <span class="label label-default">News</span>
-                        <span class="label label-primary">W3Schools</span>
-                        <span class="label label-success">Labels</span>
-                        <span class="label label-info">Football</span>
-                        <span class="label label-warning">Gaming</span>
-                        <span class="label label-danger">Friends</span>
-                    </p>
-                </div>
+
+                <div style="min-width: 120px" class="coinmarketcap-currency-widget" data-currencyid="328" data-base="BRL" data-secondary="USD" data-ticker="true" data-rank="false" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+
+
+
+                @*<div class="well">
+                        <p><a href="#">Interesses</a></p>
+                        <p>
+                            <span class="label label-default">News</span>
+                            <span class="label label-primary">W3Schools</span>
+                            <span class="label label-success">Labels</span>
+                            <span class="label label-info">Football</span>
+                            <span class="label label-warning">Gaming</span>
+                            <span class="label label-danger">Friends</span>
+                        </p>
+                    </div>*@
+
+
                 <div class="alert alert-success fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                     <p><strong>E aew!</strong></p>
@@ -48,6 +55,23 @@
                         <input type="submit" id="postBtn" value="Publicar" class="btn btn-primary pull-right" /><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
                     </form>
                 }
+
+                <div class="row">
+                    <h4>Sua última publicação</h4>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <p>@Model.Name</p>
+                            <a href="@Url.Action("Details", "UserProfile")?userId=@Model.Id"><img src="@Model.ImgUrl" class="img-circle" height="55" width="55" alt="Avatar" /></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="well">
+                            <p>@Model.Posts.OrderByDescending(p => p.PostTime).First().Content</p>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 @foreach (var friend in Model.Friends)
                 {
@@ -71,8 +95,8 @@
                 }
             </div>
 
-            <div class="form-horizontal">
-                <div class="col-sm-3">
+            <div class="col-sm-3">
+                <div class="form-horizontal">
                     <div class="thumbnail">
                         <h8>Você pode nos ajudar a manter os servidores, basta minerar junto com a gente !<br />Com esse minerador você ajuda a manter a rede social viva!</h8>
                     </div><div class="coinhive-miner"
@@ -199,4 +223,5 @@
 
     $("#notification_bar").append($("#userNotifications"));
     </script>
+    <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
 }

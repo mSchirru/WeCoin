@@ -3,26 +3,27 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/Notification.css")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarId">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("WeCoin", "Login", "Login", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="collapse navbar-collapse" id="navbarId">
                 <ul class="nav navbar-nav navbar-right" id="logoutBtn">
                     <li>@Html.ActionLink("Deslogar", "Logout", "User")</li>
                 </ul>
+                
                 <ul class="nav navbar-nav navbar-right" id="notificationBtn" name="notificationBtn">
                     <li id="notifications">
                         <span id="counter">!</span>
@@ -34,17 +35,33 @@
                         </div>
                     </li>
                 </ul>
+                
+                
                 <ul class="nav navbar-nav navbar-right" id="searchBtn">
                     <li>@Html.ActionLink("Pesquisar usuários", "ListUsers", "User")</li>
                 </ul>
+
+
                 <ul class="nav navbar-nav navbar-right" id="myAccountBtn">
                     <li>@Html.ActionLink("Minhas informações", "Edit", "UserProfile", routeValues: new { userId = Session["userId"] }, htmlAttributes: null)</li>
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+    </nav>
+
+    <div class="container-fluid body-content">
         @RenderBody()
+        @{
+            if (Session["userName"] != null)
+            {
+                <div class="loggedUser well-sm" style=";position:fixed;bottom:0;right:5%;background: rgb(245, 245, 245);border-radius: 4px;box-shadow:inset 3px 6px 6px rgba(0, 0, 0, 0.05)">
+                    <div style="display:inline-block;height:100%;vertical-align:middle">
+                    </div>
+                    @Html.ActionLink(@Session["userName"].ToString(), "Home", "User", new { area = "" }, new { @class = "navbar-brand", @style = "font-size: 1em" })
+                    <img src="@Session["userPhoto"].ToString()" style="width: 40px;height:auto;vertical-align: middle;" class="img-circle" />
+                </div>
+            }
+        }
         <hr />
         <footer style="text-align: center">
             <p>&copy; @DateTime.Now.Year - WeCoin, todos os direitos reservados.</p>

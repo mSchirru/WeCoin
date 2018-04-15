@@ -7,36 +7,39 @@
     }
     <div class="container-fluid">
         <div class="row content">
-            <div class="col-sm-3 well" style="text-align: center">
-                <img src="@Model.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar">
-                <h4> @Model.Name </h4>
-                @{
-                    <h5>@(DateTime.Now.Year - Model.BirthDate.Year) anos</h5>
-                }
-                @{
-                    if (Session["userId"].ToString().Equals(Model.Id))
-                    {
-                        <button type="button" class="btn btn-success">Você!</button>
+            <div class="col-sm-3" style="text-align: center">
+                <h2>Perfil</h2>
+                <div class="well">
+                    <img src="@Model.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar">
+                    <h4> @Model.Name </h4>
+                    @{
+                        <h5>@(DateTime.Now.Year - Model.BirthDate.Year) anos</h5>
                     }
-                    else if (ViewBag.IsFriend)
-                    {
-                        <button type="button" class="btn btn-success">Amigos</button>
-                    }
-                    else if (!ViewBag.IsFriend && ViewBag.RequestedFriendship)
-                    {
-                        <button type="button" class="btn btn-secondary">Solicitação de amizade enviada</button>
-                    }
-                    else if (!ViewBag.RequestedFriendship)
-                    {
+                    @{
+                        if (Session["userId"].ToString().Equals(Model.Id))
+                        {
+                            <button type="button" class="btn btn-success">Você!</button>
+                        }
+                        else if (ViewBag.IsFriend)
+                        {
+                            <button type="button" class="btn btn-success">Amigos</button>
+                        }
+                        else if (!ViewBag.IsFriend && ViewBag.RequestedFriendship)
+                        {
+                            <button type="button" class="btn btn-secondary">Solicitação de amizade enviada</button>
+                        }
+                        else if (!ViewBag.RequestedFriendship)
+                        {
 
-                        <button id="requestBtn" type="button" onclick="location.href='@Url.Action("RequestUserFriendship", "UserProfile")?toUserId=@Model.Id'" class="btn btn-info">Enviar pedido de amizade</button>
+                            <button id="requestBtn" type="button" onclick="location.href='@Url.Action("RequestUserFriendship", "UserProfile")?toUserId=@Model.Id'" class="btn btn-info">Enviar pedido de amizade</button>
+                        }
                     }
-                }
+                </div>
                 <input type="hidden" value="@Model.Id" />
             </div>
 
-            <div class="col-sm-9">
-                <h4><small>Publicações recentes</small></h4>
+            <div class="col-sm-6">
+                <h4>Publicações recentes</h4>
                 <hr>
                 @{
                     if (Model.Posts.Count > 1)
@@ -57,6 +60,27 @@
                         <br><br>
                     }
                 }
+            </div>
+
+            <div class="col-sm-3" style="text-align: center">
+                <h2>Amigos</h2>
+                <div class="well">
+                    @{
+                        int aux = 0;
+                        foreach (var friends in Model.Friends)
+                            {
+                            if (aux < 3 && friends.Accepted)
+                            {
+                                <img src="@friends.ToApplicationUser.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar">
+                                <h4> @friends.ToApplicationUser.Name </h4>
+                                <h5>@(DateTime.Now.Year - friends.ToApplicationUser.BirthDate.Year) anos</h5>
+                                aux++;
+                                continue;
+                            }
+                            break;
+                        }
+                    }
+                </div>
             </div>
         </div>
     </div>
