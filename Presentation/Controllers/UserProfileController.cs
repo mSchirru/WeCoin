@@ -80,6 +80,9 @@ namespace Presentation.Controllers
         [HttpPost]
         public ActionResult Edit(ApplicationUserViewModel avm, HttpPostedFileBase profilePhoto)
         {
+            if (!ModelState.IsValid)
+                return View(avm);
+
             HttpClient client = new HttpClient();
             var content = new MultipartFormDataContent("Upload----" + DateTime.Now.ToString(CultureInfo.InvariantCulture));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["userToken"].ToString());

@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-
+﻿
 namespace Presentation.ViewModels
 {
     public class FriendshipViewModel
@@ -10,7 +9,7 @@ namespace Presentation.ViewModels
 
         public bool Accepted { get; set; }
 
-        public virtual ApplicationUser ToApplicationUser { get; set; }
-        public virtual ApplicationUser FromApplicationUser { get; set; }
+        public ApplicationUserViewModel ToApplicationUser { get; set; }
+        public ApplicationUserViewModel FromApplicationUser { get; set; }
     }
 }

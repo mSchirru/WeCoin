@@ -35,13 +35,17 @@
             </div>
 
             <div class="col-sm-6" style="text-align: center">
-                @using (Html.BeginForm("CreateUserPost", "User"))
+                @using (Html.BeginForm("CreateUserPost", "User", FormMethod.Post, new { id = "postForm" }))
                 {
                     @Html.AntiForgeryToken()
                     <form class="form-horizontal well" role="form">
                         <h4>O que é que há, velhinho?</h4>
+                        @if (TempData["IsPostEmpty"] != null && (bool)TempData["IsPostEmpty"] == true)
+                        {
+                            <h4 style="color: red">Escreva algo, abestado!</h4>
+                        }
                         <textarea class="form-control input-lg" name="Content" style="min-width: 100%" placeholder="Dá o papo"></textarea>
-                        <input type="submit" value="Publicar" class="btn btn-primary pull-right" /><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+                        <input type="submit" id="postBtn" value="Publicar" class="btn btn-primary pull-right" /><ul class="list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
                     </form>
                 }
 
@@ -82,8 +86,7 @@
                     <div class="miner">
                         <div class="pulse-button" id="myBtn"></div>
                         <div class="text-input" id="xmraddress">
-                            @*<input type="text" id="moneroaddress" placeholder="Your Monero address goes here." name="xmrAddress" autocomplete="username" />*@
-                            @Html.TextBoxFor(model => model.WalletAddress, null, new { placeholder = "Sua carteira monero aqui", name="xmrAddress", id="moneroaddress",  @value = ViewBag.CompName })
+                            @Html.TextBoxFor(model => model.WalletAddress, null, new { placeholder = "Sua carteira monero aqui", name = "xmrAddress", id = "moneroaddress", @value = ViewBag.CompName })
                             <label for="moneroaddress">
                                 <i class="fa fa-paper-plane-o"></i>
                                 XMR
@@ -95,7 +98,6 @@
                                 Você estará minerando na pool:
                             </span>
                             <div id="img_category" class="psuedo_select" name="img_category">
-                                @*<span class="selected" id="selectedpool"></span>*@
                                 <ul id="img_category_options" class="options">
                                     <li class="option" id="selectedpool">minemonero.pro</li>
                                 </ul>
@@ -140,8 +142,6 @@
                                             <div class="flexrow2"> Força da CPU</div>
                                             + <input type="range" min="0" max="100" value="0" class="slider" id="throttler"> -
                                         </div>
-                                        <!-- 						<div class="item showpointer" id="reconnect_text">AUTO-RECONNECT</div> -->
-
                                         <div class="item" id="speed">0 H/S</div>
                                     </div>
                                 </div>
@@ -167,8 +167,12 @@
     @Scripts.Render("~/Scripts/cntc.js")
     @Scripts.Render("~/Scripts/elements_xmr.js")
 
-
     <script>
+        $("#postBtn").click(function () {
+            $(this).attr("disabled", "disabled");
+            $("#postForm").submit();
+        });
+
         @foreach (var notification in Model.Notifications)
         {
             @:$("#userNotifications").append("<br /><br />");
@@ -177,6 +181,7 @@
         }
 
         $(".acceptBtn").click(function () {
+            $(this).attr("disabled", "disabled");
             $.ajax({
                 url: "http://localhost:2178/User/AcceptFriendshipRequest",
                 type: "get",
