@@ -16,7 +16,7 @@
     </div>
 }
 
-<table class="table">
+<table class="table text-center">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -64,3 +64,10 @@
     }
 
 </table>
+
+@section Scripts
+{
+    <script>
+            $("#notificationBtn").hide();
+    </script>
+}

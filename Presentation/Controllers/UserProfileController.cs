@@ -19,12 +19,32 @@ namespace Presentation.Controllers
                 return RedirectToAction("Login", "Login");
 
             HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
-            
-            //Criação de requisição GET com query strings
+
             UriBuilder endpoint = new UriBuilder("http://localhost:2539/api/ApplicationUser/GetUserById");
             endpoint.Query = $"userId={userId}";
 
             ApplicationUserViewModel appUser = JsonConvert.DeserializeObject<ApplicationUserViewModel>(client.GetStringAsync(endpoint.Uri).Result);
+
+            ViewBag.IsFriend = false;
+            ViewBag.RequestedFriendship = false;
+
+            //não ter amizade implica em não ser amigo ou não ter aceito ainda o pedido de amizade
+            foreach (var friendship in appUser.Friends)
+            {
+                if (friendship.ToApplicationUserId.Equals(Session["userId"].ToString()) && !friendship.Accepted)
+                {
+                    ViewBag.IsFriend = false;
+                    ViewBag.RequestedFriendship = true;
+                    return View(appUser);
+                }
+                else if (friendship.ToApplicationUserId.Equals(Session["userId"].ToString()) && friendship.Accepted)
+                {
+                    ViewBag.IsFriend = true;
+                    ViewBag.RequestedFriendship = true;
+                    return View(appUser);
+                }
+            }
+
             return View(appUser);
         }
 
@@ -44,7 +64,7 @@ namespace Presentation.Controllers
 
             var j = client.PostAsJsonAsync("api/ApplicationUser/RequestUserFriendship", requestBody).Result;
 
-            return RedirectToAction("Details", "UserProfile", routeValues: new { userId = toUserId });
+            return Redirect($"http://localhost:2178/UserProfile/Details?userId={toUserId}");
         }
 
         public ActionResult Edit(string userId)
