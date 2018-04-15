@@ -10,9 +10,18 @@
             <div class="col-sm-3 well" style="text-align: center">
                 <img src="@Model.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar">
                 <h4> @Model.Name </h4>
-                <button type="button" class="btn btn-light">
-                    @Html.ActionLink("Enviar pedido de amizade", "RequestUserFriendship", "UserProfile", routeValues: new { toUserId = Model.Id }, htmlAttributes: null)
-                </button>
+                @{
+                    if (ViewBag.IsFriend){
+                        <button type="button" class="btn btn-success">Amigos</button>
+                    }
+                    else if (!ViewBag.IsFriend && ViewBag.RequestedFriendship){
+                        <button type="button" class="btn btn-secondary">Solicitação de amizade enviada</button>
+                    }
+                    else if (!ViewBag.RequestedFriendship){
+
+                        <button type="button" onclick="location.href='@Url.Action("RequestUserFriendship", "UserProfile")?toUserId=@Model.Id'" class="btn btn-info">Enviar pedido de amizade</button>
+                    }
+                }
                 <input type="hidden" value="@Model.Id" />
             </div>
 

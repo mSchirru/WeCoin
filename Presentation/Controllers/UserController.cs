@@ -54,12 +54,12 @@ namespace Presentation.Controllers
             if (notificationMessage.Contains("amizade"))
             {
                 HttpResponseMessage httpMessage = client.PostAsJsonAsync("api/Notification/DeleteNotification", requestBody).Result;
-                return View();
+                return Redirect("Home");
             }
 
             var j = client.PostAsJsonAsync("api/ApplicationUser/AcceptUserFriendship", requestBody).Result;
-
-            return View();
+            
+            return Redirect("Home");
         }
 
         [HttpPost]

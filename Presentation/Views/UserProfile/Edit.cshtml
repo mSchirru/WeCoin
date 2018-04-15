@@ -11,9 +11,9 @@
         {
             <form action="#" method="post" class="form" role="form">
                 <div class="form-horizontal">
-                    
+
                     <input type="hidden" name="Id" value="@Model.Id" />
-                    
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -21,7 +21,7 @@
                             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -29,14 +29,14 @@
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.ImgUrl, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             <input type="file" name="profilePhoto" accept="image/*" />
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @Value = Model.BirthDate.ToString("yyyy-MM-dd"), @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -44,7 +44,7 @@
                             @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.WalletAddress, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -53,11 +53,11 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <button class="btn btn-sm btn-success " type="submit" onclick="window.location.href('@Url.Action("Profile", "Home")')">
                     Save Changes
                 </button>
-                
+
                 <button type="reset" class="btn btn-default btn-sm">
                     Clear
                 </button>
@@ -65,3 +65,11 @@
         }
     </div>
 </body>
+
+
+@section Scripts
+{
+    <script>
+        $("#notificationBtn").hide();
+    </script>
+}

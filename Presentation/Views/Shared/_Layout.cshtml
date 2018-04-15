@@ -35,7 +35,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" id="searchBtn">
-                    <li>@Html.ActionLink("Pesquisar usuários", "ListUsers", "User", routeValues: new { userId = Session["userId"] }, htmlAttributes: null)</li>
+                    <li>@Html.ActionLink("Pesquisar usuários", "ListUsers", "User")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" id="myAccountBtn">
                     <li>@Html.ActionLink("Minhas informações", "Edit", "UserProfile", routeValues: new { userId = Session["userId"] }, htmlAttributes: null)</li>

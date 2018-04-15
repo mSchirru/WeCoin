@@ -12,7 +12,7 @@
 
             <div class="col-sm-3">
                 <div class="well">
-                    <img src="@Model.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar">
+                    <img src="@Model.ImgUrl" class="img-circle" height="130" width="130" alt="Avatar">
                     <p>@Html.ActionLink(Model.Name, "Details", "UserProfile", routeValues: new { userId = Model.Id }, htmlAttributes: null)</p>
                 </div>
 
@@ -29,8 +29,8 @@
                 </div>
                 <div class="alert alert-success fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <p><strong>Ey!</strong></p>
-                    People are looking at your profile. Find out who.
+                    <p><strong>E aew!</strong></p>
+                    Satisfação enorme em ter você aqui!
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
                     if (friend.ToApplicationUser.Posts.Count > 0 && friend.Accepted)
                     {
                         <div class="row">
-                            <h4>Publicações dos seus amigos</h4>
+                            <h4>Publicações mais recentes dos seus amigos</h4>
                             <div class="col-sm-3">
                                 <div class="well">
                                     <p>@friend.ToApplicationUser.Name</p>
@@ -59,7 +59,7 @@
                             </div>
                             <div class="col-sm-9">
                                 <div class="well">
-                                    <p>@friend.ToApplicationUser.Posts.First().Content</p>
+                                    <p>@friend.ToApplicationUser.Posts.OrderByDescending(p => p.PostTime).First().Content</p>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +84,6 @@
             </div>
         </div>
     </div>
-    </div>
 </body>
 
 @section Scripts
@@ -100,23 +99,21 @@
             @:$("#userNotifications").append(`<button data-notification-message="@notification.Message" data-notification-id="@notification.NotificationId" data-issuer="@notification.NotificationIssuer.Id" class="acceptBtn btn btn-success" style='width:45%' type='button' class='btn btn-success btn-sm'><a class="links">Aceitar</a></button>`);
         }
 
-        //TODO: implementar botão de recusa de amizade e remoção de notificação
-        //$("#userNotifications").append(`<button class="deleteBtn" style='width:45%' type='button' class='btn btn-success btn-sm'><a data-issuer="@*@notification.NotificationIssuer.Id*@" class="links">Aceitar</a></button>`
-
         $(".acceptBtn").click(function () {
-        $.ajax({
-            url: "http://localhost:2178/User/AcceptFriendshipRequest",
-            type: "get",
-            data: {
-                "toUserId": $(this).attr("data-issuer"),
-                "notificationId": $(this).attr("data-notification-id"),
-                "notificationMessage": $(this).attr("data-notification-message")
-            },
-            success: function () {
-            },
-            dataType: "json"
+            $.ajax({
+                url: "http://localhost:2178/User/AcceptFriendshipRequest",
+                type: "get",
+                data: {
+                    "toUserId": $(this).attr("data-issuer"),
+                    "notificationId": $(this).attr("data-notification-id"),
+                    "notificationMessage": $(this).attr("data-notification-message")
+                },
+                success: function () {
+                },
+                dataType: "json"
+            });
+            window.location.reload(true);
         });
-        })
 
     $("#notification_bar").append($("#userNotifications"));
     </script>
