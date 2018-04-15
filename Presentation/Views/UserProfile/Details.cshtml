@@ -11,15 +11,25 @@
                 <img src="@Model.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar">
                 <h4> @Model.Name </h4>
                 @{
-                    if (ViewBag.IsFriend){
+                    <h5>@(DateTime.Now.Year - Model.BirthDate.Year) anos</h5>
+                }
+                @{
+                    if (Session["userId"].ToString().Equals(Model.Id))
+                    {
+                        <button type="button" class="btn btn-success">Você!</button>
+                    }
+                    else if (ViewBag.IsFriend)
+                    {
                         <button type="button" class="btn btn-success">Amigos</button>
                     }
-                    else if (!ViewBag.IsFriend && ViewBag.RequestedFriendship){
+                    else if (!ViewBag.IsFriend && ViewBag.RequestedFriendship)
+                    {
                         <button type="button" class="btn btn-secondary">Solicitação de amizade enviada</button>
                     }
-                    else if (!ViewBag.RequestedFriendship){
+                    else if (!ViewBag.RequestedFriendship)
+                    {
 
-                        <button type="button" onclick="location.href='@Url.Action("RequestUserFriendship", "UserProfile")?toUserId=@Model.Id'" class="btn btn-info">Enviar pedido de amizade</button>
+                        <button id="requestBtn" type="button" onclick="location.href='@Url.Action("RequestUserFriendship", "UserProfile")?toUserId=@Model.Id'" class="btn btn-info">Enviar pedido de amizade</button>
                     }
                 }
                 <input type="hidden" value="@Model.Id" />
@@ -56,5 +66,8 @@
 {
     <script>
         $("#notificationBtn").hide();
+        $("#requestBtn").click(function () {
+            $(this).attr("disabled", "disabled");
+        })
     </script>
 }

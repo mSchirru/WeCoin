@@ -7,62 +7,62 @@
 <body>
     <div class="container well">
         <legend><a href="http://www.jquery2dotnet.com"><i class="glyphicon glyphicon-globe"></i></a> Informações pessoais</legend>
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <form action="#" method="post" class="form" role="form">
-                <div class="form-horizontal">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", id = "postForm" }))
+    {
+        <div class="form-horizontal">
+            <hr />
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <input type="hidden" name="Password" value="1M@ndrake" />
+            <input type="hidden" name="ConfirmPassword" value="1M@ndrake" />
 
-                    <input type="hidden" name="Id" value="@Model.Id" />
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ImgUrl, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            <input type="file" name="profilePhoto" accept="image/*" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @Value = Model.BirthDate.ToString("yyyy-MM-dd"), @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @Value = Model.BirthDate.ToString("yyyy-MM-dd"), @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.WalletAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.WalletAddress, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.WalletAddress, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
+            </div>
 
-                <button class="btn btn-sm btn-success " type="submit" onclick="window.location.href('@Url.Action("Profile", "Home")')">
-                    Save Changes
-                </button>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-                <button type="reset" class="btn btn-default btn-sm">
-                    Clear
-                </button>
-            </form>
-        }
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImgUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="profilePhoto" accept="image/*" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @Value = Model.BirthDate.ToString("yyyy-MM-dd"), @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @Value = Model.BirthDate.ToString("yyyy-MM-dd"), @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.WalletAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.WalletAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.WalletAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input id="editBtn" class="btn btn-sm btn-success" type="submit" value="Salvar alterações" />
+                <input type="reset" class="btn btn-default btn-sm" value="Resetar campos" />
+            </div>
+        </div>
+}
     </div>
 </body>
 
@@ -71,5 +71,9 @@
 {
     <script>
         $("#notificationBtn").hide();
+        $("#editBtn").click(function () {
+            $(this).attr("disabled", "disabled");
+            $("#postForm").submit();
+        });
     </script>
 }

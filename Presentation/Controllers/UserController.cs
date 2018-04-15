@@ -66,9 +66,13 @@ namespace Presentation.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateUserPost(PostViewModel pvm)
         {
+            if (pvm.Content == null)
+            {
+                TempData["IsPostEmpty"] = true;
+                return RedirectToAction("Home", "User");
+            }
             pvm.PostTime = DateTime.Now;
             HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
-
             var POSTResult = client.PostAsJsonAsync("api/ApplicationUser/CreateUserPost", pvm).Result;
             return RedirectToAction("Home", "User");
         }

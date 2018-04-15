@@ -56,7 +56,7 @@ namespace API.ViewModels
         [Required(ErrorMessage = "Digite a data de aniversário")]
         [DataType(DataType.DateTime)]
         [DisplayName("Data de Aniversário")]
-        public DateTime Date { get; set; }
+        public DateTime BirthDate { get; set; }
     }
 
     public class RegisterExternalBindingModel
