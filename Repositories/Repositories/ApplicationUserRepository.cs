@@ -15,7 +15,7 @@ namespace Repositories.Repositories
 
         public IEnumerable<ApplicationUser> GetUsersByName(string userName)
         {
-            return Rc.Users.Where(u => u.UserName.ToLower().Contains(userName.ToLower())).ToList();
+            return Rc.Users.Where(u => u.Name.ToLower().Contains(userName.ToLower())).ToList();
         }
 
         public IEnumerable<Friendship> GetUserFriends(string userId)
@@ -61,7 +61,7 @@ namespace Repositories.Repositories
             return Rc.SaveChanges();
         }
 
-        public int EditUser(ApplicationUser appUser)
+        public int EditUserWithPhoto(ApplicationUser appUser)
         {
             ApplicationUser applicationUser = GetUserById(appUser.Id);
 
@@ -70,6 +70,17 @@ namespace Repositories.Repositories
             applicationUser.BirthDate = appUser.BirthDate;
             applicationUser.WalletAddress = appUser.WalletAddress;
             applicationUser.ImgUrl = appUser.ImgUrl;
+            return Rc.SaveChanges();
+        }
+
+        public int EditUser(ApplicationUser appUser)
+        {
+            ApplicationUser applicationUser = GetUserById(appUser.Id);
+
+            applicationUser.Name = appUser.Name;
+            applicationUser.Email = appUser.Email;
+            applicationUser.BirthDate = appUser.BirthDate;
+            applicationUser.WalletAddress = appUser.WalletAddress;
             return Rc.SaveChanges();
         }
 

@@ -6,13 +6,19 @@
 
 <h2>Usuários encontrados</h2>
 
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+
 @using (Html.BeginForm("ListFilteredUsers", "User", FormMethod.Post))
 {
     <div class="input-group">
         <span class="input-group-btn">
             <button class="btn btn-secondary" type="submit">Buscar</button>
         </span>
-        <input type="text" name="pSearch" id="pSearch" class="form-control" placeholder="Buscar alguém pelo nome...">
+        <input type="text" name="pSearch" id="pSearch" class="form-control" placeholder="Buscar alguém pelo primeiro nome...">
     </div>
 }
 

@@ -83,15 +83,27 @@ namespace Services
                 BirthDate = DateTime.Parse(formParams.FormData["BirthDate"]),
                 WalletAddress = formParams.FormData["WalletAddress"]
             };
+            
+            var imageUrl = BlobService.GetUploadedFile("wecoin", formParams.FormData["Id"], userPhoto, formParams.FormData["contentType"]);
+            appUser.ImgUrl = imageUrl;
+            
+            return Ar.EditUserWithPhoto(appUser);
+        }
 
-            if (userPhoto != null)
+        public int EditUser(MultipartFormDataStreamProvider formParams)
+        {
+            ApplicationUser appUser = new ApplicationUser()
             {
-                var imageUrl = BlobService.GetUploadedFile("wecoin", formParams.FormData["Id"], userPhoto, formParams.FormData["contentType"]);
-                appUser.ImgUrl = imageUrl;
-            }
+                Id = formParams.FormData["Id"],
+                Name = formParams.FormData["Name"],
+                Email = formParams.FormData["Email"],
+                BirthDate = DateTime.Parse(formParams.FormData["BirthDate"]),
+                WalletAddress = formParams.FormData["WalletAddress"]
+            };
 
             return Ar.EditUser(appUser);
         }
+
 
         public int CreateUserPost(string userId, Post post) => Ar.CreateUserPost(userId, post);
     }
