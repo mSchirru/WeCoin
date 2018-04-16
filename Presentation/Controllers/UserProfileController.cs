@@ -108,5 +108,26 @@ namespace Presentation.Controllers
 
             return RedirectToAction("Home", "User");
         }
+
+        public ActionResult DeletePost(int postId)
+        {
+            if (Session["userToken"] == null)
+                return RedirectToAction("Login", "Login");
+
+            HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
+
+            ApplicationUserViewModel appUser = JsonConvert.DeserializeObject<ApplicationUserViewModel>(client.GetStringAsync("api/ApplicationUser/GetLoggedUser").Result);
+            JObject requestBody = new JObject();
+            requestBody["postId"] = postId;
+
+            foreach (var post in appUser.Posts)
+                if (post.PostId == postId)
+                {
+                    HttpResponseMessage httpMessage = client.PostAsJsonAsync("Api/Post/Delete", requestBody).Result;
+                    return RedirectToAction("Home", "User");
+                }
+
+            return RedirectToAction("Home", "User");
+        }
     }
 }
