@@ -49,14 +49,28 @@
                         for (int i = 0; i < 2; i++)
                         {
                             <h5><span class="glyphicon glyphicon-time"></span> Publicado em @posts.ElementAt(i).PostTime</h5>
-                            <p>@posts.ElementAt(i).Content</p>
+                            <p>
+                                @posts.ElementAt(i).Content @if (Session["userId"].ToString().Equals(Model.Id))
+                                {
+                                    <a href="@Url.Action("DeletePost", "UserProfile")?postId=@posts.ElementAt(i).PostId" class="btn btn-danger btn-sm">
+                                        <span class="glyphicon glyphicon-remove"></span> Excluir publicação
+                                    </a>
+                                }
+                            </p>
                             <br><br>
                         }
                     }
                     else if (Model.Posts.Count == 1)
                     {
                         <h5><span class="glyphicon glyphicon-time"></span> Publicado em @Model.Posts.First().PostTime</h5>
-                        <p>@Model.Posts.First().Content</p>
+                        <p>
+                            @Model.Posts.First().Content @if (Session["userId"].ToString().Equals(Model.Id))
+                            {
+                                <a href="@Url.Action("DeletePost", "UserProfile")?postId=@Model.Posts.First().PostId" class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-remove"></span> Excluir publicação
+                                </a>
+                            }
+                        </p>
                         <br><br>
                     }
                 }
@@ -68,10 +82,10 @@
                     @{
                         int aux = 0;
                         foreach (var friends in Model.Friends)
-                            {
+                        {
                             if (aux < 3 && friends.Accepted)
                             {
-                                <img src="@friends.ToApplicationUser.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar">
+                                <a href="@Url.Action("Details", "UserProfile")?userId=@friends.ToApplicationUser.Id"><img src="@friends.ToApplicationUser.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar"></a>
                                 <h4> @friends.ToApplicationUser.Name </h4>
                                 <h5>@(DateTime.Now.Year - friends.ToApplicationUser.BirthDate.Year) anos</h5>
                                 aux++;

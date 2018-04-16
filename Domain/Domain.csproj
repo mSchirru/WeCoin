@@ -68,6 +68,7 @@
     <Compile Include="Interfaces\Repositories\IApplicationUserRepository.cs" />
     <Compile Include="Interfaces\Repositories\IBaseRepository.cs" />
     <Compile Include="Interfaces\Repositories\INotificationRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPostRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
