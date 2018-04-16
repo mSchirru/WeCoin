@@ -125,7 +125,7 @@ var elem_a = document.getElementById("poolselector");
 
             var patt = new RegExp(/[a-zA-Z|\d]{94}/);
             if (!patt.test(elem_e.value)) {
-                alert("Entre um endereço de XMR válido.");
+                alert("Entre um endereï¿½o de XMR vï¿½lido.");
                 return false;
             }
 
