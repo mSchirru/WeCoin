@@ -14,11 +14,6 @@ namespace Presentation.Controllers
             return View();
         }
 
-        public ActionResult RegisterNew()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult Register(ApplicationUserViewModel avm)
         {
@@ -36,6 +31,11 @@ namespace Presentation.Controllers
 
             //TODO: registrar usuário e receber sinal de sucesso ou erro no cadastro
             return RedirectToAction("Login", "Login");
+        }
+
+        public ActionResult About()
+        {
+            return View();
         }
     }
 }

@@ -158,11 +158,18 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\images\bandmember.jpg" />
     <Content Include="Content\EditProfile.css" />
+    <Content Include="Content\images\alexandre.jpg" />
+    <Content Include="Content\images\coins1.png" />
+    <Content Include="Content\images\coins2.png" />
+    <Content Include="Content\images\diego.jpg" />
     <Content Include="Content\images\facebook-icons.png" />
     <Content Include="Content\images\facebook-icons2.png" />
+    <Content Include="Content\images\fernando.jpg" />
+    <Content Include="Content\images\jao.jpg" />
+    <Content Include="Content\images\mikael.jpg" />
     <Content Include="Content\images\monero.png" />
+    <Content Include="Content\images\standard.png" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\Notification.css" />
     <Content Include="Content\PostList.css" />
@@ -186,6 +193,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\ads.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -253,6 +261,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Register\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "WeCoin - Home";
+}
+
+<style>
+    .row img {
+        width: 200px;
+        height: auto;
+    }
+</style>
+
+<div class="container">
+
+    <h1 class="my-4">
+        WeCoin
+        <small>Uma breve introdução</small>
+    </h1>
+    <p>
+        WeCoin é uma rede social com foco em criptomoedas e mineração. Promovemos as interações entre usuários e a criação de conteúdo através da mineração de criptomoedas.
+        Os usuários recebem uma pequena quantia de Monero ao usar o site através da mineração, e também podem minerar para outros usuários se assim quiserem.
+    </p>
+
+    <div class="row" style="text-align: center">
+        <div class="col-lg-12">
+            <h2 class="my-4">A Equipe</h2>
+            <br />
+        </div>
+
+        <div class="col-lg-4 col-sm-6 text-center mb-4">
+            <img class="img-circle img-fluid d-block mx-auto" src="~/Content/images/mikael.jpg" alt="">
+            <h3>
+                Mikael Schirru
+                <small>Analista de Requisitos</small>
+            </h3>
+            <p>Responsável pela documentação do projeto.</p>
+        </div>
+
+
+        <div class="col-lg-4 col-sm-6 text-center mb-4">
+            <img class="img-circle img-fluid d-block mx-auto" src="~/Content/images/jao.jpg" alt="">
+            <h3>
+                João Lima
+                <small>Desenvolvedor</small>
+            </h3>
+            <p>Desenvolvedor front-end</p>
+        </div>
+
+        <div class="col-lg-4 col-sm-6 text-center mb-4">
+            <img class="img-circle img-fluid d-block mx-auto" src="~/Content/images/fernando.jpg" alt="">
+            <h3>
+                Fernando Lapa
+                <small>Gerente do projeto e responsável pela aplicação de metodologias ágeis</small>
+            </h3>
+            <p>!</p>
+        </div>
+
+        <div class="col-lg-6 col-sm-6 text-center mb-4">
+            <img class="img-circle img-fluid d-block mx-auto" src="~/Content/images/alexandre.jpg" alt="">
+            <h3>
+                Alexandre
+                <small>Anão</small>
+            </h3>
+            <p>Desenvolvedor responsável pelas funcionalidades de mineração do site</p>
+        </div>
+
+        <div class="col-lg-6 col-sm-6 text-center mb-4">
+            <img class="img-circle img-fluid d-block mx-auto" src="~/Content/images/diego.jpg" alt="">
+            <h3>
+                Diego Victor
+                <small>Desenvolvedor</small>
+            </h3>
+            <p>Desenvolvedor back-end</p>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#myAccountBtn").hide();
+        $("#logoutBtn").hide();
+        $("#notificationBtn").hide();
+    </script>
+}

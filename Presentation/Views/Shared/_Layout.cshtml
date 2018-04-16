@@ -6,11 +6,12 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/ads.js")
     @Styles.Render("~/Content/Notification.css")
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarId">
                     <span class="icon-bar"></span>
@@ -20,10 +21,15 @@
                 @Html.ActionLink("WeCoin", "Login", "Login", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="collapse navbar-collapse" id="navbarId">
+
                 <ul class="nav navbar-nav navbar-right" id="logoutBtn">
                     <li>@Html.ActionLink("Deslogar", "Logout", "User")</li>
                 </ul>
-                
+
+                <ul class="nav navbar-nav navbar-right" id="aboutBtn">
+                    <li>@Html.ActionLink("Sobre", "About", "Register")</li>
+                </ul>
+
                 <ul class="nav navbar-nav navbar-right" id="notificationBtn" name="notificationBtn">
                     <li id="notifications">
                         <span id="counter">!</span>
@@ -35,8 +41,8 @@
                         </div>
                     </li>
                 </ul>
-                
-                
+
+
                 <ul class="nav navbar-nav navbar-right" id="searchBtn">
                     <li>@Html.ActionLink("Pesquisar usuários", "ListUsers", "User")</li>
                 </ul>
@@ -45,6 +51,7 @@
                 <ul class="nav navbar-nav navbar-right" id="myAccountBtn">
                     <li>@Html.ActionLink("Minhas informações", "Edit", "UserProfile", routeValues: new { userId = Session["userId"] }, htmlAttributes: null)</li>
                 </ul>
+
             </div>
         </div>
     </nav>
@@ -64,8 +71,9 @@
         }
         <hr />
         <footer style="text-align: center">
+            <img src="~/Content/images/coins2.png" width="20%" height="auto"/>
             <p>&copy; @DateTime.Now.Year - WeCoin, todos os direitos reservados.</p>
-        </footer>
+            </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
