@@ -21,7 +21,7 @@ namespace Presentation.Controllers
                 return View(avm);
 
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:2539");
+            client.BaseAddress = new Uri("https://wecoinapidebug.azurewebsites.net");
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

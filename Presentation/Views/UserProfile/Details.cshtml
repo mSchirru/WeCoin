@@ -5,6 +5,15 @@
         ViewBag.Title = "WeCoin - Perfil";
         Styles.Render("~/Content/Profile.css");
     }
+
+    <style>
+        p {
+            word-break: break-all;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+    </style>
+
     <div class="container-fluid">
         <div class="row content">
             <div class="col-sm-3" style="text-align: center">
@@ -13,24 +22,23 @@
                     <img src="@Model.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar">
                     <h4> @Model.Name </h4>
                     @{
-                        <h5>@(DateTime.Now.Year - Model.BirthDate.Year) anos</h5>
-                    }
-                    @{
-                        if (Session["userId"].ToString().Equals(Model.Id))
-                        {
+                        DateTime now1 = DateTime.Today;
+                        int age1 = now1.Year - Model.BirthDate.Year;
+                        if (now1 < Model.BirthDate.AddYears(age1)){
+                            age1--;
+                        }
+
+                        <h5>@age1 anos</h5>
+                        if (Session["userId"].ToString().Equals(Model.Id)){
                             <button type="button" class="btn btn-success">Você!</button>
                         }
-                        else if (ViewBag.IsFriend)
-                        {
+                        else if (ViewBag.IsFriend){
                             <button type="button" class="btn btn-success">Amigos</button>
                         }
-                        else if (!ViewBag.IsFriend && ViewBag.RequestedFriendship)
-                        {
+                        else if (!ViewBag.IsFriend && ViewBag.RequestedFriendship){
                             <button type="button" class="btn btn-secondary">Solicitação de amizade enviada</button>
                         }
-                        else if (!ViewBag.RequestedFriendship)
-                        {
-
+                        else if (!ViewBag.RequestedFriendship){
                             <button id="requestBtn" type="button" onclick="location.href='@Url.Action("RequestUserFriendship", "UserProfile")?toUserId=@Model.Id'" class="btn btn-info">Enviar pedido de amizade</button>
                         }
                     }
@@ -87,7 +95,14 @@
                             {
                                 <a href="@Url.Action("Details", "UserProfile")?userId=@friends.ToApplicationUser.Id"><img src="@friends.ToApplicationUser.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar"></a>
                                 <h4> @friends.ToApplicationUser.Name </h4>
-                                <h5>@(DateTime.Now.Year - friends.ToApplicationUser.BirthDate.Year) anos</h5>
+                                DateTime now = DateTime.Today;
+                                int age = now.Year - friends.ToApplicationUser.BirthDate.Year;
+                                if (now < friends.ToApplicationUser.BirthDate.AddYears(age))
+                                {
+                                    age--;
+                                }
+
+                                <h5>@age anos</h5>
                                 aux++;
                                 continue;
                             }
