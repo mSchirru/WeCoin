@@ -326,7 +326,7 @@ namespace API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Name = model.Name, BirthDate = model.BirthDate, ImgUrl = "/Content/images/standard.png" };
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Name = model.Name, BirthDate = model.BirthDate, ImgUrl = "/Content/images/standard.png", State = model.State, Country = model.Country };
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)

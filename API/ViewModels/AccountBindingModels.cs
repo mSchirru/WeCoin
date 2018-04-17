@@ -57,6 +57,10 @@ namespace API.ViewModels
         [DataType(DataType.DateTime)]
         [DisplayName("Data de Aniversário")]
         public DateTime BirthDate { get; set; }
+
+        public string Country { get; set; }
+
+        public string State { get; set; }
     }
 
     public class RegisterExternalBindingModel

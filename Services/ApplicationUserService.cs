@@ -30,6 +30,11 @@ namespace Services
 
         public IEnumerable<ApplicationUser> GetUsersByName(string userName) => Ar.GetUsersByName(userName);
 
+        public IEnumerable<ApplicationUser> GetUsersByRange(int offset, int quantity)
+        {
+            return Ar.GetUsersByRange(offset, quantity);
+        }
+
         public int RequestUserFriendship(JObject jObj)
         {
             string fromUserId = jObj["fromUserId"].ToString();
@@ -81,7 +86,9 @@ namespace Services
                 Name = formParams.FormData["Name"],
                 Email = formParams.FormData["Email"],
                 BirthDate = DateTime.Parse(formParams.FormData["BirthDate"]),
-                WalletAddress = formParams.FormData["WalletAddress"]
+                WalletAddress = formParams.FormData["WalletAddress"],
+                State = formParams.FormData["State"],
+                Country = formParams.FormData["Country"]
             };
             
             var imageUrl = BlobService.GetUploadedFile("wecoin", formParams.FormData["Id"], userPhoto, formParams.FormData["contentType"]);
@@ -98,7 +105,9 @@ namespace Services
                 Name = formParams.FormData["Name"],
                 Email = formParams.FormData["Email"],
                 BirthDate = DateTime.Parse(formParams.FormData["BirthDate"]),
-                WalletAddress = formParams.FormData["WalletAddress"]
+                WalletAddress = formParams.FormData["WalletAddress"],
+                State = formParams.FormData["State"],
+                Country = formParams.FormData["Country"]
             };
 
             return Ar.EditUser(appUser);

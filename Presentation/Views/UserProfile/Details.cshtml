@@ -19,33 +19,40 @@
             <div class="col-sm-3" style="text-align: center">
                 <h2>Perfil</h2>
                 <div class="well">
-                    <img src="@Model.ImgUrl" class="img-circle" height="65" width="65" alt="Avatar">
+                    <img src="@Model.ImgUrl" class="img-circle" height="auto" width="110" alt="Avatar">
                     <h4> @Model.Name </h4>
                     @{
                         DateTime now1 = DateTime.Today;
                         int age1 = now1.Year - Model.BirthDate.Year;
-                        if (now1 < Model.BirthDate.AddYears(age1)){
+                        if (now1 < Model.BirthDate.AddYears(age1))
+                        {
                             age1--;
                         }
 
                         <h5>@age1 anos</h5>
-                        if (Session["userId"].ToString().Equals(Model.Id)){
+                        if (Session["userId"].ToString().Equals(Model.Id))
+                        {
                             <button type="button" class="btn btn-success">Você!</button>
                         }
-                        else if (ViewBag.IsFriend){
+                        else if (ViewBag.IsFriend)
+                        {
                             <button type="button" class="btn btn-success">Amigos</button>
                         }
-                        else if (!ViewBag.IsFriend && ViewBag.RequestedFriendship){
+                        else if (!ViewBag.IsFriend && ViewBag.RequestedFriendship)
+                        {
                             <button type="button" class="btn btn-secondary">Solicitação de amizade enviada</button>
                         }
-                        else if (!ViewBag.RequestedFriendship){
+                        else if (!ViewBag.RequestedFriendship)
+                        {
                             <button id="requestBtn" type="button" onclick="location.href='@Url.Action("RequestUserFriendship", "UserProfile")?toUserId=@Model.Id'" class="btn btn-info">Enviar pedido de amizade</button>
                         }
+                        <br />
+                        <p>Mora em @Model.State, @Model.Country</p>
                     }
                 </div>
                 <input type="hidden" value="@Model.Id" />
+                <img style="width:100px;height:auto" src=@Url.Content("~/Content/images/" + @Model.Country.ToLower() + ".jpg") />
             </div>
-
             <div class="col-sm-6">
                 <h4>Publicações recentes</h4>
                 <hr>

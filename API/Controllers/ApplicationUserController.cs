@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using API.DTOs;
+using AutoMapper;
+using Domain.Entities;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
 using Services;
@@ -40,6 +42,15 @@ namespace API.Controllers
         public IEnumerable<ApplicationUser> GetUsers()
         {
             return appUserService.GetUsers();
+        }
+
+        [AllowAnonymous]
+        public IEnumerable<UserListDTO> GetUsersByRange(int offset, int quantity)
+        {
+            IEnumerable<ApplicationUser> applicationUsers = appUserService.GetUsersByRange(offset, quantity);
+            IEnumerable<UserListDTO> users = Mapper.Map<IEnumerable<UserListDTO>>(applicationUsers);
+
+            return users;
         }
 
         public IEnumerable<ApplicationUser> GetUserFriends()

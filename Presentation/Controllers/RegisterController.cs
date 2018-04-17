@@ -20,11 +20,7 @@ namespace Presentation.Controllers
             if (!ModelState.IsValid)
                 return View(avm);
 
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://wecoinapidebug.azurewebsites.net");
-            client.DefaultRequestHeaders.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+            HttpClient client = MVCUtils.GetClient("");
             JObject requestBody = JObject.FromObject(avm);
             
             client.PostAsJsonAsync("api/Account/Register", requestBody);
