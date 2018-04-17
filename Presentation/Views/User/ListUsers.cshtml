@@ -10,6 +10,10 @@
     th {
         text-align: center;
     }
+
+    td {
+        text-align: center;
+    }
 </style>
 
 @using (Html.BeginForm("ListFilteredUsers", "User", FormMethod.Post))
@@ -71,6 +75,20 @@
 
 </table>
 
+<div class="col-lg-12 text-center well">
+
+    <a href="@Url.Action("ListUsers", "User")?offset=@(Int32.Parse(TempData["offset"].ToString()) - 5)&quantity=5" class="btn btn-primary">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+    </a>
+
+    <a href="@Url.Action("ListUsers", "User")?offset=@(Int32.Parse(TempData["offset"].ToString()) + 5)&quantity=5" class="btn btn-primary">
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+
+    <div class="form-group">
+        <h3>@TempData["errorMsg"]</h3>
+    </div>
+</div>
 
 @section Scripts
 {

@@ -18,39 +18,39 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <div class="form-horizontal" role="form">
+                    <div class="form-horizontal" role="form">
 
-                            <p style="text-align: center;color: red;font-weight: bolder">@ViewBag.Message</p>
+                        <p style="text-align: center;color: red;font-weight: bolder">@ViewBag.Message</p>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="inputPassword3" class="col-md-2 control-label">
-                                    Senha
-                                </label>
-                                <div class="col-md-10">
-                                    <input type="password" name="Psw" class="form-control" id="inputPassword3" placeholder="Senha" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <input id="registerBtn" class="btn btn-sm btn-success" type="submit" value="Logar" />
-                                    <button type="reset" class="btn btn-default btn-sm">
-                                        Limpar campos
-                                    </button>
-                                </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        @*<div class="g-recaptcha" data-sitekey="6Ld0nlMUAAAAAKnoWKdita3cEjzUn7zp-fPk-HYj"></div>*@
-                        @reCaptcha.ReCaptcha.GetHtml(@ViewBag.publicKey, null, null, null, "pt-BR")
+
+
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-md-2 control-label">
+                                Senha
+                            </label>
+                            <div class="col-md-10">
+                                <input type="password" name="Psw" class="form-control" id="inputPassword3" placeholder="Senha" required>
+                            </div>
+                        </div>
+
+                        @reCaptcha.ReCaptcha.GetHtml(@ViewBag.publicKey, null, null, null, "pt-BR") <br />
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input id="registerBtn" class="btn btn-sm btn-success" type="submit" value="Logar" />
+                                <button type="reset" class="btn btn-default btn-sm">
+                                    Limpar campos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
                         if (ViewBag.RecaptchaLastErrors != null)
                         {

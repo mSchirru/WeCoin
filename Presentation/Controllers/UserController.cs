@@ -5,6 +5,7 @@ using Presentation.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Presentation.Controllers
 {
@@ -21,10 +22,19 @@ namespace Presentation.Controllers
             return View(appUser);
         }
 
-        public ActionResult ListUsers()
+        public ActionResult ListUsers(int offset, int quantity)
         {
             HttpClient client = MVCUtils.GetClient("");
-            IEnumerable<ApplicationUserViewModel> appUsers = JsonConvert.DeserializeObject<IEnumerable<ApplicationUserViewModel>>(client.GetStringAsync("api/ApplicationUser/GetUsers").Result);
+
+            if (offset < 0)
+                offset = 0;
+
+            TempData["offset"] = offset;
+
+            IEnumerable<ApplicationUserViewModel> appUsers = JsonConvert.DeserializeObject<IEnumerable<ApplicationUserViewModel>>(client.GetStringAsync($"api/ApplicationUser/GetUsersByRange?offset={offset}&quantity={quantity}").Result);
+
+            if (appUsers.Count() == 0)
+                TempData["errorMsg"] = "Fim da lista de usuários";
 
             return View(appUsers);
         }

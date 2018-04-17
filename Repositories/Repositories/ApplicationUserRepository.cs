@@ -45,6 +45,12 @@ namespace Repositories.Repositories
             return Rc.SaveChanges();
         }
 
+        public IEnumerable<ApplicationUser> GetUsersByRange(int offset, int quantity)
+        {
+            return Rc.Users.OrderBy(u => u.Name).Skip(offset).Take(quantity).ToList();
+        }
+
+
         public int AcceptUserFriendship(string fromUserId, string toUserId)
         {
             ApplicationUser appUser = Rc.Users.SingleOrDefault(u => u.Id.Equals(fromUserId));
@@ -70,6 +76,8 @@ namespace Repositories.Repositories
             applicationUser.BirthDate = appUser.BirthDate;
             applicationUser.WalletAddress = appUser.WalletAddress;
             applicationUser.ImgUrl = appUser.ImgUrl;
+            applicationUser.State = appUser.State;
+            applicationUser.Country = appUser.Country;
             return Rc.SaveChanges();
         }
 
@@ -81,6 +89,8 @@ namespace Repositories.Repositories
             applicationUser.Email = appUser.Email;
             applicationUser.BirthDate = appUser.BirthDate;
             applicationUser.WalletAddress = appUser.WalletAddress;
+            applicationUser.State = appUser.State;
+            applicationUser.Country = appUser.Country;
             return Rc.SaveChanges();
         }
 

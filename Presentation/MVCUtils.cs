@@ -8,7 +8,7 @@ namespace Presentation
 {
     public class MVCUtils
     {
-        private const string BASE_API_ADDRESS = "https://wecoinapidebug.azurewebsites.net";
+        private const string BASE_API_ADDRESS = "http://localhost:2539/";
 
         public static string GetUserToken(string username, string psw)
         {
@@ -41,7 +41,5 @@ namespace Presentation
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", userToken);
             return client;
         }
-
-
     }
 }

@@ -169,6 +169,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\EditProfile.css" />
     <Content Include="Content\images\alexandre.jpg" />
+    <Content Include="Content\images\brasil.jpg" />
     <Content Include="Content\images\coins1.png" />
     <Content Include="Content\images\coins2.png" />
     <Content Include="Content\images\diego.jpg" />
@@ -197,7 +198,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="connections.config" />
-    <None Include="Properties\PublishProfiles\wecoinapp - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\wecoinappdebug - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

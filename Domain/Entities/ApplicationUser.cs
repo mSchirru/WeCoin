@@ -19,6 +19,9 @@ namespace Domain.Entities
         public string WalletAddress { get; set; }
         public double CoinAmount { get; set; }
         public double CoinQuote { get; set; }
+        public string Country { get; set; }
+        public string State { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {

@@ -9,6 +9,7 @@
     @Scripts.Render("~/Scripts/ads.js")
     @Styles.Render("~/Content/Notification.css")
     <script src='https://www.google.com/recaptcha/api.js?hl=pt-BR'></script>
+    <link rel="icon" href="@Url.Content("~/Content/images/monero.png")"/>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -45,7 +46,7 @@
 
 
                 <ul class="nav navbar-nav navbar-right" id="searchBtn">
-                    <li>@Html.ActionLink("Pesquisar usuários", "ListUsers", "User")</li>
+                    <li>@Html.ActionLink("Pesquisar usuários", "ListUsers", "User", routeValues: new { offset = 0, quantity = 5}, htmlAttributes: null)</li>
                 </ul>
 
 
