@@ -5,6 +5,15 @@
         ViewBag.Title = "WeCoin - Home";
         Styles.Render("~/Content/PostList.css");
     }
+
+    <style>
+        p {
+            word-break: break-all;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+    </style>
+
     <div class="text-center" style="margin-top: 3%">
         <div class="row">
 
@@ -101,7 +110,7 @@
                     </div>
 
                     <div class="thumbnail">
-                        <h8>Minere para você mesmo enquanto usa a nossa rede social!</h8>
+                        <h8>Minere para você mesmo enquanto usar a rede social!</h8>
                     </div>
 
                     <div class="miner">
@@ -207,7 +216,7 @@
         $(".acceptBtn").click(function () {
             $(this).attr("disabled", "disabled");
             $.ajax({
-                url: "http://localhost:2178/User/AcceptFriendshipRequest",
+                url: "https://wecoinappdebug.azurewebsites.net/User/AcceptFriendshipRequest",
                 type: "get",
                 data: {
                     "toUserId": $(this).attr("data-issuer"),

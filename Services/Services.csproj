@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlobService.cs" />
+    <Compile Include="BlobStorageMultipartStreamProvider.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="ApplicationUserService.cs" />
     <Compile Include="NotificationService.cs" />

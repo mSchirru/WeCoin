@@ -20,7 +20,7 @@ namespace Presentation.Controllers
 
             HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
 
-            UriBuilder endpoint = new UriBuilder("http://localhost:2539/api/ApplicationUser/GetUserById");
+            UriBuilder endpoint = new UriBuilder("https://wecoinapidebug.azurewebsites.net/api/ApplicationUser/GetUserById");
             endpoint.Query = $"userId={userId}";
 
             ApplicationUserViewModel appUser = JsonConvert.DeserializeObject<ApplicationUserViewModel>(client.GetStringAsync(endpoint.Uri).Result);
@@ -64,7 +64,7 @@ namespace Presentation.Controllers
 
             var j = client.PostAsJsonAsync("api/ApplicationUser/RequestUserFriendship", requestBody).Result;
 
-            return Redirect($"http://localhost:2178/UserProfile/Details?userId={toUserId}");
+            return Redirect($"https://wecoinappdebug.azurewebsites.net/UserProfile/Details?userId={toUserId}");
         }
 
         public ActionResult Edit(string userId)
@@ -104,7 +104,7 @@ namespace Presentation.Controllers
             content.Add(new StringContent(avm.WalletAddress), "WalletAddress");
 
             //TODO: tratar requisição para saber o sucesso ou erro da edição
-            var message = client.PostAsync("http://localhost:2539/api/ApplicationUser/EditUser", content).Result;
+            var message = client.PostAsync("https://wecoinapidebug.azurewebsites.net/api/ApplicationUser/EditUser", content).Result;
 
             return RedirectToAction("Home", "User");
         }
