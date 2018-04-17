@@ -257,6 +257,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="connections.config" />
     <None Include="Properties\PublishProfiles\TP1AZ20180314081209 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\wecoinapi - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\wecoinapidebug - Web Deploy.pubxml" />

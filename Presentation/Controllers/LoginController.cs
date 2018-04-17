@@ -1,5 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Presentation.ViewModels;
+using reCaptcha;
+using System.Configuration;
 using System.Net.Http;
 using System.Web.Mvc;
 
@@ -9,6 +12,9 @@ namespace Presentation.Controllers
     {
         public ActionResult Login()
         {
+            ViewBag.Recaptcha = ReCaptcha.GetHtml(ConfigurationManager.AppSettings["ReCaptcha:SiteKey"]);
+            ViewBag.publicKey = ConfigurationManager.AppSettings["ReCaptcha:SiteKey"];
+
             if (Session["userToken"] == null)
                 return View();
             else
@@ -16,24 +22,35 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string email, string psw)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginViewModel lvm)
         {
-            string userToken = MVCUtils.GetUserToken(email, psw);
-            
-            if (userToken != null)
+            if (ModelState.IsValid && ReCaptcha.Validate(ConfigurationManager.AppSettings["ReCaptcha:SecretKey"]))
             {
-                Session["userToken"] = userToken;
+                string userToken = MVCUtils.GetUserToken(lvm.Email, lvm.Psw);
 
-                HttpClient client = MVCUtils.GetClient(Session["userToken"].ToString());
-                ApplicationUserViewModel appUser = JsonConvert.DeserializeObject<ApplicationUserViewModel>(client.GetStringAsync("api/ApplicationUser/GetLoggedUser").Result);
+                if (userToken != null)
+                {
+                    Session["userToken"] = userToken;
 
-                Session["userId"] = appUser.Id;
-                Session["userPhoto"] = appUser.ImgUrl;
-                Session["userName"] = appUser.UserName;
-                return RedirectToAction("Home", "User");
+                    HttpClient client = MVCUtils.GetClient("");
+                    client = MVCUtils.GetClient(Session["userToken"].ToString());
+                    ApplicationUserViewModel appUser = JsonConvert.DeserializeObject<ApplicationUserViewModel>(client.GetStringAsync("api/ApplicationUser/GetLoggedUser").Result);
+
+                    Session["userId"] = appUser.Id;
+                    Session["userPhoto"] = appUser.ImgUrl;
+                    Session["userName"] = appUser.UserName;
+                    return RedirectToAction("Home", "User");
+                }
+
+                ViewBag.Message = "Senha incorreta ou usuário não encontrado";
+                ViewBag.publicKey = ConfigurationManager.AppSettings["ReCaptcha:SiteKey"];
+                return View(lvm);
             }
 
-            ViewBag.Message = "Senha incorreta ou usuário não encontrado";
+            ViewBag.RecaptchaLastErrors = ReCaptcha.GetLastErrors(this.HttpContext);
+            ViewBag.publicKey = ConfigurationManager.AppSettings["ReCaptcha:SiteKey"];
+
             return View();
         }
     }
