@@ -1,10 +1,12 @@
-﻿@{
+﻿@model Presentation.ViewModels.LoginViewModel
+@{
     ViewBag.Title = "Login - WeCoin: the best for the best";
+    reCaptcha.ReCaptcha.GetHtml(ViewBag.publicKey);
 }
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-7">
+        <div class="container-fluid col-md-offset-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-lock"></span> Login
@@ -17,37 +19,45 @@
                         @Html.AntiForgeryToken()
 
                         <div class="form-horizontal" role="form">
-                                <div class="form-group">
-                                    <p style="text-align: center;color: red;font-weight: bolder">@ViewBag.Message</p>
-                                    
-                                    <label for="inputEmail3" class="col-sm-3 control-label">
-                                        Email
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label">
-                                        Senha
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input type="password" name="psw" class="form-control" id="inputPassword3" placeholder="Senha" required>
-                                    </div>
-                                </div>
 
-                                <div class="form-group last">
-                                    <div class="col-sm-offset-3 col-sm-9">
-                                        <input type="submit" value="Login" class="btn btn-success btn-sm" />
-                                        <button type="reset" class="btn btn-default btn-sm">
-                                            Limpar campos
-                                        </button>
-                                    </div>
+                            <p style="text-align: center;color: red;font-weight: bolder">@ViewBag.Message</p>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-md-2 control-label">
+                                    Senha
+                                </label>
+                                <div class="col-md-10">
+                                    <input type="password" name="Psw" class="form-control" id="inputPassword3" placeholder="Senha" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input id="registerBtn" class="btn btn-sm btn-success" type="submit" value="Logar" />
+                                    <button type="reset" class="btn btn-default btn-sm">
+                                        Limpar campos
+                                    </button>
+                                </div>
+                            </div>
                         </div>
+                        @*<div class="g-recaptcha" data-sitekey="6Ld0nlMUAAAAAKnoWKdita3cEjzUn7zp-fPk-HYj"></div>*@
+                        @reCaptcha.ReCaptcha.GetHtml(@ViewBag.publicKey, null, null, null, "pt-BR")
+
+                        if (ViewBag.RecaptchaLastErrors != null)
+                        {
+                            <h5>Prove que você é um humano!</h5>
+                        }
+
                     }
-
-
                 </div>
                 <div class="panel-footer">
                     Não tem cadastro? @Html.ActionLink("Clique aqui para se cadastrar", "Register", "Register")
