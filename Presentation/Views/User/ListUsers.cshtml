@@ -34,9 +34,6 @@
         <th>
             @Html.DisplayNameFor(model => model.ImgUrl)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WalletAddress)
-        </th>
         <th></th>
     </tr>
 
@@ -48,9 +45,6 @@
             </td>
             <td>
                 <img src="@Html.DisplayFor(modelItem => item.ImgUrl)" class="img-circle" height="65" width="65" alt="Avatar" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WalletAddress)
             </td>
         </tr>
     }
