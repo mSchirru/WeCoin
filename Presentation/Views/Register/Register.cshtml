@@ -19,6 +19,7 @@
                     @*<p>This is a small modal.</p>*@
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="accept">Aceitar</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
                 </div>
             </div>
@@ -119,7 +120,7 @@
              
         });
 
-        $('#checkboxModal').click(function()
+        $('#accept').click(function()
         {
             if ($('#checkboxModal').is(":checked")) {
                 $('#myModal').modal('hide');
@@ -128,9 +129,16 @@
             }
         });
 
+        $("#accept").on("click", function () {
+            if (($("input[name*='termosdeuso']:checked").length) <= 0) {
+                alert("Você precisa aceitar os termos de uso. Recomendamos que leia antes de aceitar.");
+            }
+            return false;
+        });
+
         $("#close").on("click",function(){
             if (($("input[name*='termosdeuso']:checked").length)<=0) {
-                alert("Você precisa aceitar os termos de uso, recomendo que leia antes de aceitar");
+                alert("Você precisa aceitar os termos de uso. Recomendamos que leia antes de aceitar.");
             }
             return false;
         });
