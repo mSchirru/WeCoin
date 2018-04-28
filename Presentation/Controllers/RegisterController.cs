@@ -33,5 +33,15 @@ namespace Presentation.Controllers
         {
             return View();
         }
+
+        public ActionResult UserTerms()
+        {
+            return View();
+        }
+
+        public ActionResult FaqPage()
+        {
+            return View();
+        }
     }
 }

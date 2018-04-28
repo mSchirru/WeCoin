@@ -29,6 +29,10 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right" id="aboutBtn">
+                    <li>@Html.ActionLink("FAQ", "FaqPage", "Register")</li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right" id="aboutBtn">
                     <li>@Html.ActionLink("Sobre", "About", "Register")</li>
                 </ul>
 
@@ -46,7 +50,7 @@
 
 
                 <ul class="nav navbar-nav navbar-right" id="searchBtn">
-                    <li>@Html.ActionLink("Pesquisar usuários", "ListUsers", "User", routeValues: new { offset = 0, quantity = 5}, htmlAttributes: null)</li>
+                    <li>@Html.ActionLink("Pesquisar usuários", "ListUsers", "User", routeValues: new { offset = 0, quantity = 5 }, htmlAttributes: null)</li>
                 </ul>
 
 

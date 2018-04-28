@@ -8,7 +8,7 @@ namespace Presentation
 {
     public class MVCUtils
     {
-        private const string BASE_API_ADDRESS = "https://wecoinapi.azurewebsites.net/";
+        private const string BASE_API_ADDRESS = "https://wecoinapi.azurewebsites.net/";;
 
         public static string GetUserToken(string username, string psw)
         {

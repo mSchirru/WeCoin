@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>WeCoin FAQ</title>
+    @Styles.Render("~/Content/default.css")
+    @Styles.Render("~/Content/badgebuilder.css")
+    @Scripts.Render("~/Scripts/modernizr.js")
+</head>
+<body id="top">
+<div id="wrapper">
+    <div id="content">
+        <section id="the-logo">
+            <div id="the-logo-display-faq"></div>
+            <div id="the-logo-description-faq">
+                <h2 id="faq-header">Frequently Asked Questions</h2>
+                <ul id="faq-menu">
+                    <li><a href="#logo-represent">O que o logotipo representa?</a></li>
+                    <li><a href="#defined">O que eu posso fazer nessa rede social?</a></li>
+                    <li><a href="#criptomeda">O que é criptomoeda?</a></li>
+                    <li><a href="#wallet">O que é uma carteira?</a></li>
+                    <li><a href="#wallet">O que é Monero?</a></li>
+                    <li><a href="#who-contact">Tem mais alguma duvida?</a></li>
+                </ul>
+            </div>
+        </section>
+        <section id="faq">
+
+            <h3 id="logo-represent">O que o logotipo representa?</h3>
+            <p>Este logotipo representa a criptomoeda mais popular no mundo atualmente.</p>
+
+            <h3 id="defined">O que eu posso fazer nessa rede social?</h3>
+            <p>Na WeCoin, além de você conseguir visualizar as últimas notícias da sua moeda favorita, encontrar amigos e se comunicar com eles, você também pode minerar, tanto pra você como para seu amigo ou qualquer outra pessoa/carteira.</p>
+
+            <h3 id="criptomeda">O que é criptomoeda?</h3>
+            <p>Uma criptomoeda é um meio de troca que se utiliza da tecnologia de blockchain e da criptografia para assegurar a validade das transações e a criação de novas unidades da moeda.</p>
+
+            <h3 id="wallet">O que é uma carteira?</h3>
+            <p>Uma Carteira ou Wallet, em inglês, é onde você pode guardar suas criptomoedas. Aqui vai algumas dicas para você criar sua carteira monero, <a href="https://www.monero.how/tutorial-how-to-create-a-command-line-monero-wallet">clique aqui</a> (página em inglês).</p>
+
+            <h3 id="monero">O que é Monero</h3>
+            <p>Monero é uma das criptomoedas mais populares que existe atualmente, seu crescimento é constante.</p>
+
+            <h3 id="who-contact">Tem mais alguma duvida?</h3>
+            <p>Entre em contato com a gente em:<a href="mailto:wecoinnumismathcs@gmail.com">wecoinnumismathcs@gmail.com</a></p>
+        </section>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $("#myAccountBtn").hide();
+        $("#logoutBtn").hide();
+        $("#notificationBtn").hide();
+
+        $("nav").removeClass("navbar-fixed-top"); //Removendo fixed-top para melhorar a leitura do usuário.
+    </script>   
+}
+</body>
+</html>
