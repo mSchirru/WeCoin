@@ -163,10 +163,12 @@
     <Compile Include="ViewModels\ApplicationUserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\badgebuilder.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\default.css" />
     <Content Include="Content\EditProfile.css" />
     <Content Include="Content\images\alexandre.jpg" />
     <Content Include="Content\images\brasil.jpg" />
@@ -177,6 +179,7 @@
     <Content Include="Content\images\facebook-icons2.png" />
     <Content Include="Content\images\fernando.jpg" />
     <Content Include="Content\images\jao.jpg" />
+    <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\mikael.jpg" />
     <Content Include="Content\images\monero.png" />
     <Content Include="Content\images\standard.png" />
@@ -232,6 +235,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -272,6 +276,8 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Register\About.cshtml" />
+    <Content Include="Views\Register\UserTerms.cshtml" />
+    <Content Include="Views\Register\FaqPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

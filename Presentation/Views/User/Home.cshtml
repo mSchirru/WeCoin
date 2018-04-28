@@ -76,12 +76,12 @@
                     </div>
                 </div>
 
+                <h4>Publicações mais recentes dos seus amigos</h4>
                 @foreach (var friend in Model.Friends)
                 {
                     if (friend.ToApplicationUser.Posts.Count > 0 && friend.Accepted)
                     {
                         <div class="row">
-                            <h4>Publicações mais recentes dos seus amigos</h4>
                             <div class="col-sm-3">
                                 <div class="well">
                                     <p>@friend.ToApplicationUser.Name</p>
@@ -196,6 +196,7 @@
     @Scripts.Render("~/Scripts/functions.js")
     @Scripts.Render("~/Scripts/cntc.js")
     @Scripts.Render("~/Scripts/elements_xmr.js")
+    @Scripts.Render("~/Scripts/currency.js")
 
     <script>
         if (window.canRunAds === undefined)
@@ -232,5 +233,4 @@
 
     $("#notification_bar").append($("#userNotifications"));
     </script>
-    <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
 }
