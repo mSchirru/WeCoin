@@ -38,7 +38,9 @@ namespace Presentation.ViewModels
         [DisplayName("Endereço da carteira virtual")]
         [RegularExpression("4[0-9AB][123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{93}", ErrorMessage = "Endereço de carteira Monero inválido!")]
         public string WalletAddress { get; set; }
+        [DisplayName("País")]
         public string Country { get; set; }
+        [DisplayName("Estado")]
         public string State { get; set; }
 
         public ICollection<FriendshipViewModel> Friends { get; set; }

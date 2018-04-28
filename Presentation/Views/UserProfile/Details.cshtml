@@ -51,7 +51,12 @@
                     }
                 </div>
                 <input type="hidden" value="@Model.Id" />
-                <img style="width:100px;height:auto" src=@Url.Content("~/Content/images/" + @Model.Country.ToLower() + ".jpg") />
+                @{
+                    if (Model.Country != null)
+                    {
+                        <img style="width:100px;height:auto" src=@Url.Content("~/Content/images/" + @Model.Country.ToLower() + ".jpg") />
+                    }
+                }
             </div>
             <div class="col-sm-6">
                 <h4>Publicações recentes</h4>
