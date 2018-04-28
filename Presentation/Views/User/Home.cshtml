@@ -27,8 +27,8 @@
 
                 <div class="alert alert-success fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <p><strong>E aew!</strong></p>
-                    Satisfação enorme em ter você aqui!
+                    <p><strong>Futuras Atualizações:</strong></p>
+                    Mais moedas para minerar e ficar de olho!
                 </div>
             </div>
 
@@ -37,12 +37,12 @@
                 {
                     @Html.AntiForgeryToken()
                     <form class="form-horizontal well" role="form">
-                        <h4>O que é que há, velhinho?</h4>
+                        <h4>Crie seu post na WeCoin:</h4>
                         @if (TempData["IsPostEmpty"] != null && (bool)TempData["IsPostEmpty"] == true)
                         {
-                            <h4 style="color: red">Escreva algo, abestado!</h4>
+                            <h5 style="color: red">Não é possível criar post em branco.</h5>
                         }
-                        <textarea class="form-control input-lg" name="Content" style="min-width: 100%" placeholder="Dá o papo"></textarea>
+                        <textarea class="form-control input-lg" name="Content" style="min-width: 100%" placeholder="Crie seu post!"></textarea>
                         <input type="submit" id="postBtn" value="Publicar" class="btn btn-primary pull-right" />
                         <ul class="list-inline">
                             <li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li>
