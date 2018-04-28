@@ -245,3 +245,5 @@ ModelManifest.xml
 /API/App_Data
 /Presentation/App_Data
 connections.config
+/API/Properties/PublishProfiles/wecoinapi - Web Deploy.pubxml
+*.pubxml
