@@ -62,7 +62,7 @@ namespace Presentation.Controllers
 
             var j = client.PostAsJsonAsync("api/ApplicationUser/RequestUserFriendship", requestBody).Result;
 
-            return Redirect($"https://wecoinappdebug.azurewebsites.net/UserProfile/Details?userId={toUserId}");
+            return Redirect($"https://wecoinapp.azurewebsites.net/UserProfile/Details?userId={toUserId}");
         }
 
         public ActionResult Edit(string userId)
@@ -104,7 +104,7 @@ namespace Presentation.Controllers
             content.Add(new StringContent(avm.Country), "Country");
 
             //TODO: tratar requisição para saber o sucesso ou erro da edição
-            var message = client.PostAsync("http://localhost:2539/api/ApplicationUser/EditUser", content).Result;
+            var message = client.PostAsync("https://wecoinapi.azurewebsites.net/api/ApplicationUser/EditUser", content).Result;
 
             return RedirectToAction("Home", "User");
         }
