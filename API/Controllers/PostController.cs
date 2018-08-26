@@ -26,6 +26,7 @@ namespace API.Controllers
         //{
         //}
 
+        //HTTP DELETE method?
         [Authorize]
         [HttpPost]
         public void Delete(JObject requestBody)

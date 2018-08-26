@@ -2,7 +2,7 @@
 <body>
     @{
         Layout = "~/Views/Shared/_Layout.cshtml";
-        ViewBag.Title = "WeCoin - Home";
+        ViewBag.Title = "WealthShare - Home";
         Styles.Render("~/Content/PostList.css");
     }
 
@@ -216,7 +216,7 @@
         $(".acceptBtn").click(function () {
             $(this).attr("disabled", "disabled");
             $.ajax({
-                url: "https://wecoinappdebug.azurewebsites.net/User/AcceptFriendshipRequest",
+                url: "https://wealthshare.com.br/User/AcceptFriendshipRequest",
                 type: "get",
                 data: {
                     "toUserId": $(this).attr("data-issuer"),
