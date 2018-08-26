@@ -91,7 +91,7 @@ namespace Services
                 Country = formParams.FormData["Country"]
             };
             
-            var imageUrl = BlobService.GetUploadedFile("wecoin", formParams.FormData["Id"], userPhoto, formParams.FormData["contentType"]);
+            var imageUrl = BlobService.GetUploadedFile("wealthshare", formParams.FormData["Id"], userPhoto, formParams.FormData["contentType"]);
             appUser.ImgUrl = imageUrl;
             
             return Ar.EditUserWithPhoto(appUser);

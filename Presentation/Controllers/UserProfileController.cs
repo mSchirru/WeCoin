@@ -62,7 +62,7 @@ namespace Presentation.Controllers
 
             var j = client.PostAsJsonAsync("api/ApplicationUser/RequestUserFriendship", requestBody).Result;
 
-            return Redirect($"https://wecoinapp.azurewebsites.net/UserProfile/Details?userId={toUserId}");
+            return Redirect($"https://wealthshare.com.br/UserProfile/Details?userId={toUserId}");
         }
 
         public ActionResult Edit(string userId)
@@ -82,6 +82,7 @@ namespace Presentation.Controllers
                 return View(avm);
 
             HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(MVCUtils.BASE_API_ADDRESS);
             var content = new MultipartFormDataContent("Upload----" + DateTime.Now.ToString(CultureInfo.InvariantCulture));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Session["userToken"].ToString());
 
@@ -104,7 +105,7 @@ namespace Presentation.Controllers
             content.Add(new StringContent(avm.Country), "Country");
 
             //TODO: tratar requisição para saber o sucesso ou erro da edição
-            var message = client.PostAsync("https://wecoinapi.azurewebsites.net/api/ApplicationUser/EditUser", content).Result;
+            var message = client.PostAsync("api/ApplicationUser/EditUser", content).Result;
 
             return RedirectToAction("Home", "User");
         }
