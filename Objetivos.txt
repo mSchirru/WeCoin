@@ -1,0 +1,143 @@
+﻿Appendar notificações no componente notification_bar - OK
+Setar id do usuário logado na sessão - OK
+Colocar informações do usuário logado na home - OK
+Deslogar da aplicação - OK
+Corrigir registro - OK
+Fixar página de registro - OK
+Editar usuário - OK
+Adicionar foto com blob - OK
+Revisar edição de usuário (upload de blob) - OK
+Revisar criação de usuário - OK
+Remoção das entidades de carteira e moeda. Definido que o usuário terá uma carteira de Monero - OK
+Busca de usuários - OK
+Criar lista consultável de todos os usuários - OK
+Lista de usuários - OK
+	Link na lista - OK
+	Exibição da imagem - OK
+	Acertar displaynames - OK
+Checar quantidade de posts do usuário para iterar duas vezes - OK
+Colocar caminhos para chegar ao profile de um usuário - OK
+	Pela página de posts da home - OK
+	Pela lista consultável de todos os usuários - OK
+Implementar amizades - OK
+	Entrar no PERFIL DO USUÁRIO - OK
+	Clicar no BOTÃO DE SOLICITAÇÃO DE AMIZADE - OK
+	Gerar uma NOTIFICAÇÃO - OK
+	Ver a NOTIFICAÇÃO - OK
+	Aceitar amizade - OK
+	Gerar NOTIFICAÇÃO DE ACEITE DA AMIZADE - OK
+	Criar ASSOCIAÇÃO - OK
+Adaptar formulários de criação de user p/ birth date - OK
+Status de amizade na página de profile - OK
+	Solicitar amizade - OK
+	Esperando aceite - OK
+	Amigos - OK
+ADICIONAR MINERADORES - OK
+NOTIFICAÇÃO - OK
+	Ao aceitar amizade, remover notificação - OK
+	Ao ler notificação, remover - OK
+	Atualizar a página no clique de aceite - OK
+REGISTRO/EDIÇÃO
+	Tratar imagem nula - OK
+	Tratar data no formulário de edição não preenchida - OK
+	Preencher data automaticamente no formulário de edição de usuário - OK
+PUXAR COMMIT DE MINERAÇÃO DA BRANCH DO ALEXANDRE (feature/Miner) - OK
+Caso o usuário não envie foto na edição, manter a existente - OK
+FriendshipViewModel com ApplicationUserViewModel em vez de ApplicationUser - OK
+Regex para validar o formato da carteira de Monero - OK 
+Remoção de walletviewmodel - OK
+Mostrar idade dos usuários - OK
+Validação de campo vazio de post - OK
+Refatoração no código da funcionalidade de cadastro - OK
+campos nulos - OK
+confirmação senha - OK
+botão desabilitado - OK
+Complexidade de senha igual ao do identity - OK
+Acertar clear dos forms - OK
+Removido necessidade de caractere minúsculo na senha - OK
+Desabilitar botões ao serem clicados (impedir múltiplas requisições)
+	Botão de post - OK
+	Botão de envio de amizade - OK
+	Botão de cadastro - OK
+	Botão de edição - OK
+	Botão de aceite de notificação - OK
+Mostrar amigos do usuário na página de perfil - OK
+Mostrar último post do próprio usuário na home - OK
+Indicativo de usuário logado (foto + username) - OK
+Atualização p/ Bootstrap 3.3.7 - OK
+Atualização do jQuery - OK
+Painel de cotação Monero no lugar de interesses - OK
+Foto padrão ao cadastrar usuário - OK
+Mudança no layout - OK
+Footer com fotos de criptos - OK
+Página explicando o que é o WeCoin - OK
+Detectar e falar do AdBlock - OK
+*Deletar posts - OK
+*Mostrar deleção de post apenas para o próprio usuário - OK
+Adicionar captcha no login - OK
+	Criar loginviewmodel p auxiliar no captcha - OK
+Acertar cálculo de idade (considerar mês) - OK
+Quebrar posts muito grandes - OK
+ACERTAR EDIÇÃO NO APPDEBUG - OK (FALTAVA PASTA APP_DATA NO SERVIDOR)
+Acertar minerador individual - OK
+
+
+
+*SUBIR APP EM RELEASE
+Paginar lista de usuários - OK
+Criação de DTO para otimizar exibição da lista de usuários - OK
+AutoMapper na API p/ uso de DTOs - OK
+Ícone na aplicação - TROCAR
+
+Lista de restrições a cumprir no input selecionado
+Esconder scrolls nas notificações
+Usuário adm da aplicação
+Esqueceu a senha
+Fechar notificação clicando no ícone
+Unit of Work
+Métricas de mineração
+Máscara no input de telefone
+Desabilitar botão do cadastro enquanto os inputs estiverem incorretos
+
+
+
+*Usuário adm da aplicação
+*Visualizar input do password
+*Esconder configurações sensíveis do web.config (testar com publicação no Azure)
+*Implementar cache para economizar requisições
+*Minerar em janela separada
+*Minerar para outros usuários
+*Configurar integração contínua
+*Implementar reações
+*Adicionar 2fa SMS
+*Juntar camada API com serviços
+	(necessidade de tratar requisições com bibliotecas web api, pegar arquivos e etc)
+	principal necessidade de pegar o arquivo
+*Implementar injeção de dependências
+*Mapa de lojas que aceitam criptomoedas no Brasil e mundo
+*Background na aplicação 
+*Notificação AJAX 
+*Quando posta alguma tag html o c# estoura uma exceção.
+*Sair em vez de deslogar
+*Mostrar temporariamente input da senha
+*Imagem com direcionamento p perfil 
+*Alterar foto clicando num botão no perfil dentro da foto
+*Previsão na edição de como ficará a foto (Sua img atual/sua nova img)
+*Você ainda não tem amigos 
+*Mudar listagem de usuários pra mobile 
+
+
+Colocar tarefas no JIRA	
+Trocar endpoints de volta p localhost
+Republicar projetos de debug no Azure
+
+
+Workflow da aplicação para testar
+Registrar
+Logar 
+Deslogar
+Editar
+Postar
+Listar usuários
+Ver perfil
+Fazer amizade
