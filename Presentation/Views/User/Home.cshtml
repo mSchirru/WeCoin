@@ -2,7 +2,7 @@
 <body>
     @{
         Layout = "~/Views/Shared/_Layout.cshtml";
-        ViewBag.Title = "WeCoin - Home";
+        ViewBag.Title = "WealthShare - Home";
         Styles.Render("~/Content/PostList.css");
     }
 
@@ -23,7 +23,7 @@
                     <p>@Html.ActionLink(Model.Name, "Details", "UserProfile", routeValues: new { userId = Model.Id }, htmlAttributes: null)</p>
                 </div>
 
-                <div style="min-width: 120px" class="coinmarketcap-currency-widget" data-currencyid="328" data-base="BRL" data-secondary="USD" data-ticker="true" data-rank="false" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+                <div class="coinmarketcap-currency-widget" data-currencyid="328" data-base="BRL" data-secondary="USD" data-ticker="true" data-rank="false" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
 
                 <div class="alert alert-success fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
@@ -217,7 +217,7 @@
         $(".acceptBtn").click(function () {
             $(this).attr("disabled", "disabled");
             $.ajax({
-                url: "https://wecoinappdebug.azurewebsites.net/User/AcceptFriendshipRequest",
+                url: "https://wealthshare.com.br/User/AcceptFriendshipRequest",
                 type: "get",
                 data: {
                     "toUserId": $(this).attr("data-issuer"),
