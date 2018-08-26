@@ -62,7 +62,7 @@ namespace Presentation.Controllers
 
             var j = client.PostAsJsonAsync("api/ApplicationUser/RequestUserFriendship", requestBody).Result;
 
-            return Redirect($"https://localhost:44394/UserProfile/Details?userId={toUserId}");
+            return Redirect($"https://wealthshare.com.br/UserProfile/Details?userId={toUserId}");
         }
 
         public ActionResult Edit(string userId)

@@ -8,7 +8,7 @@ namespace Presentation
 {
     public class MVCUtils
     {
-        public static readonly string BASE_API_ADDRESS = "https://localhost:44305";
+        public static readonly string BASE_API_ADDRESS = "https://wealthshareapi.site";
 
         public static string GetUserToken(string username, string psw)
         {
